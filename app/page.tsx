@@ -25,11 +25,12 @@ export default async function Home() {
       <div className="w-full flex justify-between items-center p-2 bg-white">
         <UserButton afterSignOutUrl="/" />
       </div>
+      <div className="w-full text-center p-3"><h2 className="text-white text-2xl font-bold">Latest Movies</h2></div>
       <div className="flex w-full flex-wrap">
         {(data.results as Movie[]).map((result) =>
-          <div className="relative w-full lg:w-1/4 aspect-square flex justify-center items-center" key={uuid()}>
-            <h2 className="text-white absolute z-10">{result.title}</h2>
-            <Image className="z-0 relative" src={`${process.env.TMDB_IMAGE_URL_BASE}w780${result.backdrop_path}`} alt={`${result.title} image`} width={500} height={500} />
+          <div className="relative w-full lg:w-1/4 aspect-video flex justify-center items-center text-center" key={uuid()}>
+            <h2 className="text-white absolute z-10 text-xl font-semibold">{result.title}</h2>
+            <Image className="z-0 min-w-full min-h-full object-cover relative" src={`${process.env.TMDB_IMAGE_URL_BASE}w780${result.backdrop_path}`} alt={`${result.title} image`} width={500} height={500} />
           </div>)}
       </div>
     </main>
