@@ -1,8 +1,10 @@
-import { UserButton, auth, currentUser } from "@clerk/nextjs"
+import Image from "next/image";
+import { UserButton } from "@clerk/nextjs"
 import Movie from "./types/Movie"
+import { v4 as uuid } from 'uuid';
 
 async function getData() {
-  const res = await fetch('https://api.themoviedb.org/3/discover/movie?api_key=a480b2e0ff17e99449e682e5b40ebc1a', { method: 'GET' })
+  const res = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_API_KEY}`, { method: 'GET' })
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
@@ -16,16 +18,20 @@ async function getData() {
 }
 
 export default async function Home() {
-  const { userId } = auth();
-  const user = await currentUser();
   const data = await getData();
 
   return (
     <main>
-      <div className="w-full flex justify-between items-center p-2 bg-white"><UserButton afterSignOutUrl="/" /></div>
-      <div className="text-white">User Id: {userId}</div>
-      {!user ? <div>User not logged in:</div> : <div>Hello {user?.firstName}</div>}
-      {(data.results as Movie[]).map((result, i) => <div key={i}>{result.title}</div>)}
+      <div className="w-full flex justify-between items-center p-2 bg-white">
+        <UserButton afterSignOutUrl="/" />
+      </div>
+      <div className="flex w-full flex-wrap">
+        {(data.results as Movie[]).map((result) =>
+          <div className="relative w-full lg:w-1/4 aspect-square flex justify-center items-center" key={uuid()}>
+            <h2 className="text-white absolute z-10">{result.title}</h2>
+            <Image className="z-0 relative" src={`${process.env.TMDB_IMAGE_URL_BASE}w780${result.backdrop_path}`} alt={`${result.title} image`} width={500} height={500} />
+          </div>)}
+      </div>
     </main>
   )
 }
