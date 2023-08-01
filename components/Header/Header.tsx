@@ -1,4 +1,4 @@
-import { UserButton } from "@clerk/nextjs"
+import { UserButton } from '@clerk/nextjs';
 
 export default function Header() {
   return (
@@ -6,5 +6,5 @@ export default function Header() {
       <span>logo</span>
       <UserButton afterSignOutUrl="/" />
     </div>
-  )
-};
+  );
+}
