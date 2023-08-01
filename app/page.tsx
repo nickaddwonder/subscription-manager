@@ -52,7 +52,7 @@ export default async function Home() {
               img={
                 {
                   src: `${process.env.TMDB_IMAGE_URL_BASE}/w500${tv.backdrop_path}`,
-                  alt: "something",
+                  alt: `${tv.name}`,
                   width: 500,
                   height: 500
                 }
@@ -71,7 +71,7 @@ export default async function Home() {
               img={
                 {
                   src: `${process.env.TMDB_IMAGE_URL_BASE}/w500${movie.backdrop_path}`,
-                  alt: "something",
+                  alt: `${movie.title}`,
                   width: 500,
                   height: 500
                 }
