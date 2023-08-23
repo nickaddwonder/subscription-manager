@@ -1,10 +1,9 @@
-import Image from 'next/image';
-import { UserButton } from '@clerk/nextjs';
 import Movie from './types/Movie';
 import TvShow from './types/TvShow';
 import { v4 as uuid } from 'uuid';
 import Card from '@/components/Card/Card';
 import Header from '@/components/Header/Header';
+import ContentTiles from '@/components/ContentTiles/ContentTiles';
 
 async function getLatestTvShows() {
   const res = await fetch(
@@ -50,10 +49,12 @@ export default async function Home() {
       <div className="w-full text-center p-3 pt-8">
         <h2 className="text-white text-2xl font-bold">Latest TV Shows</h2>
       </div>
+      <ContentTiles content={tvShows.results} />
       <div className="flex w-full flex-wrap">
         {(tvShows.results as TvShow[]).map((tv) => (
           <div className="relative w-full lg:w-1/3 xl:w-1/4" key={uuid()}>
             <Card
+              mode='button'
               title={tv.name}
               img={{
                 src: `${process.env.TMDB_IMAGE_URL_BASE}/w500${tv.backdrop_path}`,
@@ -72,6 +73,7 @@ export default async function Home() {
         {(movies.results as Movie[]).map((movie) => (
           <div className="relative w-full lg:w-1/3 xl:w-1/4 " key={uuid()}>
             <Card
+              mode={'button'}
               title={movie.title}
               img={{
                 src: `${process.env.TMDB_IMAGE_URL_BASE}/w500${movie.backdrop_path}`,

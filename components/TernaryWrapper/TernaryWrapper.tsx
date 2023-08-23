@@ -2,8 +2,8 @@ import { ReactElement, FunctionComponent } from "react"
 
 type Props = {
   condition: boolean;
-  wrapperTrue: FunctionComponent;
-  wrapperFalse: FunctionComponent;
+  wrapperTrue: (children: ReactElement) => ReactElement;
+  wrapperFalse: (children: ReactElement) => ReactElement;
   children: ReactElement;
 }
 export default function ConditionalWrapper({ condition, wrapperTrue, wrapperFalse, children }: Props) {
