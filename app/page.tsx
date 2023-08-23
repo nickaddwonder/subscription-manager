@@ -50,10 +50,10 @@ export default async function Home() {
         <h2 className="text-white text-2xl font-bold">Latest TV Shows</h2>
       </div>
       <ContentTiles content={tvShows.results} />
-      {/* <div className="w-full text-center p-3 pt-8">
+      <div className="w-full text-center p-3 pt-8">
         <h2 className="text-white text-2xl font-bold">Latest Movies</h2>
       </div>
-      <ContentTiles content={movies.results} /> */}
+      <ContentTiles content={movies.results} />
     </main>
   );
 }
