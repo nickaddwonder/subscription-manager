@@ -50,41 +50,10 @@ export default async function Home() {
         <h2 className="text-white text-2xl font-bold">Latest TV Shows</h2>
       </div>
       <ContentTiles content={tvShows.results} />
-      <div className="flex w-full flex-wrap">
-        {(tvShows.results as TvShow[]).map((tv) => (
-          <div className="relative w-full lg:w-1/3 xl:w-1/4" key={uuid()}>
-            <Card
-              mode='button'
-              title={tv.name}
-              img={{
-                src: `${process.env.TMDB_IMAGE_URL_BASE}/w500${tv.backdrop_path}`,
-                alt: `${tv.name}`,
-                width: 500,
-                height: 500,
-              }}
-            />
-          </div>
-        ))}
-      </div>
       <div className="w-full text-center p-3 pt-8">
         <h2 className="text-white text-2xl font-bold">Latest Movies</h2>
       </div>
-      <div className="flex w-full flex-wrap">
-        {(movies.results as Movie[]).map((movie) => (
-          <div className="relative w-full lg:w-1/3 xl:w-1/4 " key={uuid()}>
-            <Card
-              mode={'button'}
-              title={movie.title}
-              img={{
-                src: `${process.env.TMDB_IMAGE_URL_BASE}/w500${movie.backdrop_path}`,
-                alt: `${movie.title}`,
-                width: 500,
-                height: 500,
-              }}
-            />
-          </div>
-        ))}
-      </div>
+      <ContentTiles content={movies.results} />
     </main>
   );
 }
