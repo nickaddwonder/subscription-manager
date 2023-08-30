@@ -19,7 +19,6 @@ function Button({ children, ...props }: ComponentProps<'button'>) {
   return (
     <button
       {...props}
-      onClick={() => console.log('hello')}
       className="w-full relative aspect-video flex justify-center items-center text-center"
     >
       {children}

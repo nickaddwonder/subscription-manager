@@ -8,6 +8,8 @@ import {
   useEffect,
   ReactNode,
 } from 'react';
+import Movie from '@/app/types/Movie';
+import TvShow from '@/app/types/TvShow';
 
 type Props = {
   children: ReactNode;
@@ -20,8 +22,10 @@ export const useUserContent = () => {
 };
 
 export const UserContentProvider: FC<Props> = ({ children }) => {
-  const [contentList, setContentList] = useState<boolean>(false);
-  const value = { contentList };
+  const [contentList, setContentList] = useState<TvShow[] | Movie[]>(
+    []
+  );
+  const value = { contentList, setContentList };
   return (
     <UserContentContext.Provider value={value}>
       {children}
