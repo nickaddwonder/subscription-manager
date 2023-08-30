@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import Image from 'next/image';
 import { ComponentProps, ReactElement, useState } from 'react';
@@ -13,22 +13,36 @@ type Props = {
 
 type DivProps = {
   children: ReactElement;
-}
+};
 
 function Button({ children, ...props }: ComponentProps<'button'>) {
-  return <button {...props} onClick={() => console.log('hello')} className="w-full relative aspect-video flex justify-center items-center text-center">{children}</button>
+  return (
+    <button
+      {...props}
+      className="w-full relative aspect-video flex justify-center items-center text-center"
+    >
+      {children}
+    </button>
+  );
 }
 
 function Div({ children }: DivProps) {
-  return <div className="w-full relative aspect-video flex justify-center items-center text-center">{children}</div>
-};
+  return (
+    <div className="w-full relative aspect-video flex justify-center items-center text-center">
+      {children}
+    </div>
+  );
+}
 
 export default function Card({ mode = 'div', button, title, img }: Props) {
-
   const [src, setSrc] = useState(img.src);
 
   return (
-    <TernaryComponent condition={mode === 'button'} wrapperTrue={children => <Button {...button}>{children}</Button>} wrapperFalse={children => <Div>{children}</Div>}>
+    <TernaryComponent
+      condition={mode === 'button'}
+      wrapperTrue={(children) => <Button {...button}>{children}</Button>}
+      wrapperFalse={(children) => <Div>{children}</Div>}
+    >
       <>
         <h2 className="text-white absolute z-10 text-xl font-semibold">
           {title}
