@@ -2,7 +2,7 @@ import Header from '@/components/Header/Header';
 import ContentTiles from '@/components/ContentTiles/ContentTiles';
 import { UserContentProvider } from '@/context/UserContentContext';
 import UserContentList from '@/components/UserContentList/UserContentList';
-import addToContentList from '@/functions/addToContentList';
+
 async function getLatestTvShows() {
   const res = await fetch(
     `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.TMDB_API_KEY}`,
@@ -37,7 +37,7 @@ async function getLatestMovies() {
   return res.json();
 }
 
-export default async function Home() {
+const Home = async () => {
   const tvShows = await getLatestTvShows();
   const movies = await getLatestMovies();
 
@@ -60,3 +60,5 @@ export default async function Home() {
     </main>
   );
 }
+
+export default Home;
