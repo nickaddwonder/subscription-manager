@@ -2,6 +2,9 @@ import Header from '@/components/Header/Header';
 import ContentTiles from '@/components/ContentTiles/ContentTiles';
 import { UserContentProvider } from '@/context/UserContentContext';
 import UserContentList from '@/components/UserContentList/UserContentList';
+import { useUser } from '@clerk/nextjs';
+import { getAuth, signInWithCustomToken } from 'firebase/auth';
+import { collection, getDocs, addDoc } from 'firebase/firestore/lite';
 
 async function getLatestTvShows() {
   const res = await fetch(
@@ -45,6 +48,10 @@ const Home = async () => {
     <main>
       <UserContentProvider>
         <Header />
+        <div className="w-full text-center p-3 pt-8">
+          <h1 className="white">stuff from Firestore</h1>
+          <button className="border border-solid border-white p-4 m-4 rounded">Send to db</button>
+        </div>
         <div className="w-full text-center p-3 pt-8">
           <UserContentList />
         </div>
