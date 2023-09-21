@@ -5,7 +5,6 @@ import {
   createContext,
   useContext,
   useState,
-  useEffect,
   ReactNode,
 } from 'react';
 import Movie from '@/app/types/Movie';
@@ -20,6 +19,7 @@ const UserContentContext = createContext<any | null>(null);
 export const useUserContent = () => {
   return useContext(UserContentContext);
 };
+
 
 export const UserContentProvider: FC<Props> = ({ children }) => {
   const [contentList, setContentList] = useState<TvShow[] | Movie[]>(

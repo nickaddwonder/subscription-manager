@@ -1,6 +1,6 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useReducer } from 'react';
 import TvShow from '@/app/types/TvShow';
 import Movie from '@/app/types/Movie';
 import { v4 as uuid } from 'uuid';
@@ -9,6 +9,10 @@ import title from '@/functions/title';
 import { useUserContent } from '@/context/UserContentContext';
 import addToContentList from '@/functions/addToContentList';
 import removeFromContentList from '@/functions/removeFromContentList';
+import { useAuth } from '@clerk/nextjs';
+import { getAuth, signInWithCustomToken } from "firebase/auth";
+import { collection, getDocs, addDoc } from "firebase/firestore/lite";
+import { database } from "./../../firebase";
 
 type Props = {
   content: TvShow[] | Movie[];
@@ -16,6 +20,9 @@ type Props = {
 };
 
 const ContentTiles: FC<Props> = ({ content, cardAction }) => {
+
+  const { getToken } = useAuth();
+
   const { setContentList } = useUserContent();
   const handleClick = (c: TvShow | Movie) => {
     if (cardAction === 'add') {
@@ -24,8 +31,20 @@ const ContentTiles: FC<Props> = ({ content, cardAction }) => {
       removeFromContentList(c, setContentList);
     }
   }
+
+  const handleClickToo = async () => {
+    const firebaseClerkToken = await getToken({ template: 'integration_firebase' }) as string;
+    const auth = getAuth();
+    await signInWithCustomToken(auth, firebaseClerkToken);
+
+    const results = await addDoc(collection(database, 'contents'), { key: 'something2' });
+  }
+
   return (
     <div className="flex w-full flex-wrap">
+      <div className="w-full">
+        <button onClick={handleClickToo}>Example Button</button>
+      </div>
       {content.map((c) => (
         <div className="relative w-full lg:w-1/3 xl:w-1/4" key={uuid()}>
           <Card
