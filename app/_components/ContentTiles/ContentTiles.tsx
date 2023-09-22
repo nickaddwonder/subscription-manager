@@ -1,8 +1,8 @@
 'use client';
 
 import { FC } from 'react';
-import TvShow from '@/app/types/TvShow';
-import Movie from '@/app/types/Movie';
+import TvShow from '@/app/_types/TvShow';
+import Movie from '@/app/_types/Movie';
 import { v4 as uuid } from 'uuid';
 import Card from '../Card/Card';
 import title from '@/app/_functions/title';
