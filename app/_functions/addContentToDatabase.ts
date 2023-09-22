@@ -1,6 +1,6 @@
 import Movie from '@/app/_types/Movie';
 import TvShow from '@/app/_types/TvShow';
-import { database } from '@/firebase';
+import { database } from '@/app/firebase';
 import { DocumentReference, addDoc, collection } from 'firebase/firestore/lite';
 
 const addContentToDatabase = async (
