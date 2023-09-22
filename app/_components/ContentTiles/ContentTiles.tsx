@@ -5,13 +5,13 @@ import TvShow from '@/app/types/TvShow';
 import Movie from '@/app/types/Movie';
 import { v4 as uuid } from 'uuid';
 import Card from '../Card/Card';
-import title from '@/functions/title';
-import { useUserContent } from '@/context/UserContentContext';
-import addToContentList from '@/functions/addToContentList';
-import removeFromContentList from '@/functions/removeFromContentList';
-import authenticateUser from '@/functions/authenticateUser';
-import addContentToDatabase from '@/functions/addContentToDatabase';
-import removeContentFromDatabase from '@/functions/removeContentFromDatabase';
+import title from '@/app/_functions/title';
+import { useUserContent } from '@/app/_context/UserContentContext';
+import addToContentList from '@/app/_functions/addToContentList';
+import removeFromContentList from '@/app/_functions/removeFromContentList';
+import authenticateUser from '@/app/_functions/authenticateUser';
+import addContentToDatabase from '@/app/_functions/addContentToDatabase';
+import removeContentFromDatabase from '@/app/_functions/removeContentFromDatabase';
 
 type Props = {
   content: TvShow[] | Movie[];
