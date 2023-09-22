@@ -27,7 +27,7 @@ const ContentTiles: FC<Props> = ({ content, cardAction }) => {
         const doc = addContentToDatabase(c, 'contents');
         addToContentList({ ...c, fid: (await doc).docRef?.id as string }, setContentList);
       } else if (cardAction === 'remove') {
-        removeContentFromDatabase(c, 'contents');
+        removeContentFromDatabase((c as ((TvShow & { fid: string }) | Movie & { fid: string })), 'contents');
         removeFromContentList(c, setContentList);
       }
     }
