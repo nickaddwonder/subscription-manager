@@ -10,6 +10,7 @@ import {
 } from 'react';
 import Movie from '@/app/types/Movie';
 import TvShow from '@/app/types/TvShow';
+import { useAuth } from '@clerk/nextjs';
 
 type Props = {
   children: ReactNode;
@@ -22,10 +23,25 @@ export const useUserContent = () => {
 };
 
 export const UserContentProvider: FC<Props> = ({ children }) => {
-  const [contentList, setContentList] = useState<TvShow[] | Movie[]>(
+
+  const { getToken } = useAuth();
+  const [contentList, setContentList] = useState(
     []
   );
-  const value = { contentList, setContentList };
+  //<TvShow[] | Movie[]>
+  const [token, setToken] = useState<string | null>(null)
+  useEffect(() => {
+    const fetchToken = async () => {
+      try {
+        const token = await getToken({ template: 'integration_firebase' });
+        setToken(token);
+      } catch (error) {
+        console.error("Failed to get Clerk Token:", error);
+      }
+    }
+    fetchToken();
+  }, [getToken])
+  const value = { contentList, setContentList, token };
   return (
     <UserContentContext.Provider value={value}>
       {children}

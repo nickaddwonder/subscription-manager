@@ -9,6 +9,9 @@ import title from '@/functions/title';
 import { useUserContent } from '@/context/UserContentContext';
 import addToContentList from '@/functions/addToContentList';
 import removeFromContentList from '@/functions/removeFromContentList';
+import authenticateUser from '@/functions/authenticateUser';
+import addContentToDatabase from '@/functions/addContentToDatabase';
+import removeContentFromDatabase from '@/functions/removeContentFromDatabase';
 
 type Props = {
   content: TvShow[] | Movie[];
@@ -16,14 +19,20 @@ type Props = {
 };
 
 const ContentTiles: FC<Props> = ({ content, cardAction }) => {
-  const { setContentList } = useUserContent();
-  const handleClick = (c: TvShow | Movie) => {
-    if (cardAction === 'add') {
-      addToContentList(c, setContentList);
-    } else if (cardAction === 'remove') {
-      removeFromContentList(c, setContentList);
+
+  const { token, setContentList } = useUserContent();
+  const handleClick = async (c: TvShow | Movie) => {
+    if (await authenticateUser(token)) {
+      if (cardAction === 'add') {
+        const doc = addContentToDatabase(c, 'contents');
+        addToContentList({ ...c, fid: (await doc).docRef?.id as string }, setContentList);
+      } else if (cardAction === 'remove') {
+        removeContentFromDatabase((c as ((TvShow & { fid: string }) | Movie & { fid: string })), 'contents');
+        removeFromContentList(c, setContentList);
+      }
     }
   }
+
   return (
     <div className="flex w-full flex-wrap">
       {content.map((c) => (

@@ -43,8 +43,13 @@ const Home = async () => {
 
   return (
     <main>
+
+      <Header />
       <UserContentProvider>
-        <Header />
+        <div className="w-full text-center p-3 pt-8">
+          <h1 className="white">stuff from Firestore</h1>
+          <button className="border border-solid border-white p-4 m-4 rounded">Send to db</button>
+        </div>
         <div className="w-full text-center p-3 pt-8">
           <UserContentList />
         </div>
