@@ -45,23 +45,24 @@ const Home = async () => {
     <main>
 
       <Header />
-      <UserContentProvider>
+      <span className="text-white">Hello World</span>
+      {/* <UserContentProvider>
         <div className="w-full text-center p-3 pt-8">
           <h1 className="white">stuff from Firestore</h1>
           <button className="border border-solid border-white p-4 m-4 rounded">Send to db</button>
         </div>
         <div className="w-full text-center p-3 pt-8">
-          {/* <UserContentList /> */}
+          <UserContentList />
         </div>
         <div className="w-full text-center p-3 pt-8">
           <h2 className="text-white text-2xl font-bold">Latest TV Shows</h2>
-          {/* <ContentTiles content={tvShows.results} cardAction={'add'} /> */}
+          <ContentTiles content={tvShows.results} cardAction={'add'} />
         </div>
         <div className="w-full text-center p-3 pt-8">
           <h2 className="text-white text-2xl font-bold">Latest Movies</h2>
         </div>
-        {/* <ContentTiles content={movies.results} cardAction={'add'} /> */}
-      </UserContentProvider>
+        <ContentTiles content={movies.results} cardAction={'add'} />
+      </UserContentProvider> */}
     </main>
   );
 }
