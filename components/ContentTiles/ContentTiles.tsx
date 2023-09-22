@@ -25,9 +25,9 @@ const ContentTiles: FC<Props> = ({ content, cardAction }) => {
     if (await authenticateUser(token)) {
       if (cardAction === 'add') {
         const doc = addContentToDatabase(c, 'contents');
-        addToContentList(c, setContentList);
+        addToContentList({ ...c, fid: (await doc).docRef?.id as string }, setContentList);
       } else if (cardAction === 'remove') {
-        //removeContentFromDatabase(c, 'contents');
+        removeContentFromDatabase(c, 'contents');
         removeFromContentList(c, setContentList);
       }
     }

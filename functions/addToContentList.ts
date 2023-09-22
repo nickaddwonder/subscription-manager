@@ -5,7 +5,7 @@ import TvShow from '@/app/types/TvShow';
 import Movie from '@/app/types/Movie';
 
 const addToContentList = async (
-  content: TvShow | Movie,
+  content: (TvShow & { fid: string }) | (Movie & { fid: string }),
   setter: Dispatch<SetStateAction<TvShow[] | Movie[]>>
 ) => {
   setter((list: any) => [...list, content]);
