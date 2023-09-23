@@ -1,12 +1,12 @@
 // addContentToDatabase.test.ts
 
 import addContentToDatabase from '../addContentToDatabase';
-import { database } from '@/app/firebase';
+import { database } from '@/firebase';
 import { addDoc, collection } from 'firebase/firestore';
-import TvShow from '@/app/_types/TvShow';
+import TvShow from '@customTypes/TvShow';
 
 // Mock the database and firestore functions
-jest.mock('@/app/firebase', () => ({
+jest.mock('@/firebase', () => ({
   database: 'mocked-database',
 }));
 
