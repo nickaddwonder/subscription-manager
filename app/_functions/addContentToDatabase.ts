@@ -1,7 +1,7 @@
 import Movie from '@/app/_types/Movie';
 import TvShow from '@/app/_types/TvShow';
 import { database } from '@/app/firebase';
-import { DocumentReference, addDoc, collection } from 'firebase/firestore/lite';
+import { DocumentReference, addDoc, collection } from 'firebase/firestore';
 
 const addContentToDatabase = async (
   content: TvShow | Movie,
@@ -9,6 +9,7 @@ const addContentToDatabase = async (
 ): Promise<{ success: Boolean; docRef?: DocumentReference; error?: Error }> => {
   try {
     const docRef = await addDoc(collection(database, collectionName), content);
+    debugger;
     return { success: true, docRef };
   } catch (error) {
     console.error('Error adding document:', error);
