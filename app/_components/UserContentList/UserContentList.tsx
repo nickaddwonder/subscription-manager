@@ -1,6 +1,6 @@
 'use client';
 import { FC } from 'react';
-import { useUserContent } from '@/context/UserContentContext';
+import { useUserContent } from '@/app/_context/UserContentContext';
 import ContentTiles from '../ContentTiles/ContentTiles';
 
 const UserContentList: FC = () => {

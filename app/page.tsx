@@ -1,7 +1,7 @@
-import Header from '@/components/Header/Header';
-import ContentTiles from '@/components/ContentTiles/ContentTiles';
-import { UserContentProvider } from '@/context/UserContentContext';
-import UserContentList from '@/components/UserContentList/UserContentList';
+import Header from '@/app/_components/Header/Header';
+import ContentTiles from '@/app/_components/ContentTiles/ContentTiles';
+import { UserContentProvider } from '@/app/_context/UserContentContext';
+import UserContentList from '@/app/_components/UserContentList/UserContentList';
 
 async function getLatestTvShows() {
   const res = await fetch(
@@ -46,10 +46,6 @@ const Home = async () => {
 
       <Header />
       <UserContentProvider>
-        <div className="w-full text-center p-3 pt-8">
-          <h1 className="white">stuff from Firestore</h1>
-          <button className="border border-solid border-white p-4 m-4 rounded">Send to db</button>
-        </div>
         <div className="w-full text-center p-3 pt-8">
           <UserContentList />
         </div>

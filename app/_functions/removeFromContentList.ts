@@ -1,8 +1,8 @@
 'use client';
 
 import { Dispatch, SetStateAction } from 'react';
-import TvShow from '@/app/types/TvShow';
-import Movie from '@/app/types/Movie';
+import TvShow from '@/app/_types/TvShow';
+import Movie from '@/app/_types/Movie';
 
 const removeFromContentList = (
   content: TvShow | Movie,
