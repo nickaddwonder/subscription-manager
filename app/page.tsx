@@ -1,7 +1,7 @@
-import Header from '@/app/_components/Header/Header';
-import ContentTiles from '@/app/_components/ContentTiles/ContentTiles';
-import { UserContentProvider } from '@/app/_context/UserContentContext';
-import UserContentList from '@/app/_components/UserContentList/UserContentList';
+import Header from '@components/Header/Header';
+import ContentTiles from '@components/ContentTiles/ContentTiles';
+import { UserContentProvider } from '@context/UserContentContext';
+import UserContentList from '@components/UserContentList/UserContentList';
 
 async function getLatestTvShows() {
   const res = await fetch(

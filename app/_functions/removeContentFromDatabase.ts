@@ -1,5 +1,5 @@
 import { deleteDoc, doc } from 'firebase/firestore';
-import { database } from '@/app/firebase';
+import { database } from '@/firebase';
 import Movie from '@customTypes/Movie';
 import TvShow from '@customTypes/TvShow';
 

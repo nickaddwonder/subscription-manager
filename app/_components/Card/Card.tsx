@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { ComponentProps, ReactElement, useState } from 'react';
-import TernaryComponent from '../TernaryWrapper/TernaryWrapper';
+import TernaryComponent from '@components/TernaryWrapper/TernaryWrapper';
 
 type Props = {
   mode?: 'button' | 'div';
