@@ -8,8 +8,8 @@ import {
   useEffect,
   ReactNode,
 } from 'react';
-import Movie from '@/app/_types/Movie';
-import TvShow from '@/app/_types/TvShow';
+import Movie from '@customTypes/Movie';
+import TvShow from '@customTypes/TvShow';
 import { useAuth } from '@clerk/nextjs';
 
 type Props = {
