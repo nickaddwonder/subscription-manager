@@ -8,9 +8,9 @@ import {
   useEffect,
   ReactNode,
 } from 'react';
-import Movie from '@customTypes/Movie';
-import TvShow from '@customTypes/TvShow';
 import { useAuth } from '@clerk/nextjs';
+import documentExists from '@/_functions/documentExists/documentExists';
+import authenticateUser from '@/_functions/authenticateUser';
 
 type Props = {
   children: ReactNode;
@@ -40,7 +40,16 @@ export const UserContentProvider: FC<Props> = ({ children }) => {
       }
     }
     fetchToken();
-  }, [getToken])
+  }, [getToken]);
+
+  // useEffect(() => {
+  //   const ram = async () => {
+  //     if (await authenticateUser(token!)) {
+  //       const ran = await documentExists('content_lists/M2TAeXMLWAXlbHVR5v6I');
+  //     }
+  //   }
+  //   ram();
+  // }, [token]);
   const value = { contentList, setContentList, token };
   return (
     <UserContentContext.Provider value={value}>
