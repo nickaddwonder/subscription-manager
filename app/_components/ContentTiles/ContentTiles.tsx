@@ -10,7 +10,7 @@ import { useUserContent } from '@/app/_context/UserContentContext';
 import addToContentList from '@/app/_functions/addToContentList';
 import removeFromContentList from '@/app/_functions/removeFromContentList';
 import authenticateUser from '@/app/_functions/authenticateUser';
-import addContentToDatabase from '@/app/_functions/addContentToDatabase';
+import addContentToDatabase from '@/app/_functions/addContentToDatabase/addContentToDatabase';
 import removeContentFromDatabase from '@/app/_functions/removeContentFromDatabase';
 
 type Props = {

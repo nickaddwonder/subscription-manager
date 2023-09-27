@@ -2,6 +2,7 @@ import Header from '@/app/_components/Header/Header';
 import ContentTiles from '@/app/_components/ContentTiles/ContentTiles';
 import { UserContentProvider } from '@/app/_context/UserContentContext';
 import UserContentList from '@/app/_components/UserContentList/UserContentList';
+import Tile from './_components/Tile/Tile';
 
 async function getLatestTvShows() {
   const res = await fetch(
@@ -46,6 +47,24 @@ const Home = async () => {
 
       <Header />
       <UserContentProvider>
+        <div className="w-full text-center p-3 pt-8">
+          <Tile
+            title='movie'
+            contentType='Movie'
+            date={new Date()}
+            description='description here'
+            buttons={[
+              {
+                buttonType: 'secondary',
+                children: 'text'
+              },
+              {
+                buttonType: 'primary',
+                children: 'text'
+              }
+            ]}
+          />
+        </div>
         <div className="w-full text-center p-3 pt-8">
           <UserContentList />
         </div>

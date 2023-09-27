@@ -9,7 +9,7 @@ type Props = ComponentProps<"button"> & {
 }
 
 const Button: FC<Props> = ({ buttonType, children, ...props }) => {
-  return <button className={`${buttonType === 'secondary' ? secondaryStyle : primaryStyle} text-center tracking-tighter text-uppercase py-[0.375rem] rounded-lg px-[0.875rem] font-bold`} {...props}>{children}</button>
+  return <button className={`button ${buttonType === 'secondary' ? secondaryStyle : primaryStyle} text-center tracking-tighter mx-4 text-uppercase py-[0.375rem] rounded-lg px-[0.875rem] font-bold`} {...props}>{children}</button>
 };
 
 export default Button;
