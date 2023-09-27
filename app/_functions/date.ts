@@ -1,5 +1,5 @@
-import Movie from '@/app/_types/Movie';
-import TvShow from '@/app/_types/TvShow';
+import Movie from '@customTypes/Movie';
+import TvShow from '@customTypes/TvShow';
 
 const date = (content: Movie | TvShow): Date => {
   if ('release_date' in content) {
