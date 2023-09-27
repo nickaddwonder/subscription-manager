@@ -47,41 +47,19 @@ const Home = async () => {
 
       <Header />
       <UserContentProvider>
-        <div className="w-full text-center p-3 pt-8">
-          <Tile
-            title='movie'
-            contentType='Movie'
-            date={new Date()}
-            description='description here'
-            image={{
-              src: `${process.env.NEXT_PUBLIC_TMDB_IMAGE_URL_BASE}/w500${tvShows.results[0].backdrop_path}`,
-              alt: 'somethng',
-              width: 500,
-              height: 500
-            }}
-            buttons={[
-              {
-                buttonType: 'secondary',
-                children: 'text'
-              },
-              {
-                buttonType: 'primary',
-                children: 'text'
-              }
-            ]}
-          />
-        </div>
-        <div className="w-full text-center p-3 pt-8">
+        <div className="w-full container text-center mx-auto p-3 pt-8">
           <UserContentList />
         </div>
-        <div className="w-full text-center p-3 pt-8">
+        <div className="w-full container text-center mx-auto p-3 pt-8">
           <h2 className="text-white text-2xl font-bold">Latest TV Shows</h2>
-          <ContentTiles content={tvShows.results} cardAction={'add'} />
+          <ContentTiles contentType='TV' content={tvShows.results} cardAction={'add'} />
         </div>
-        <div className="w-full text-center p-3 pt-8">
+        <div className="w-full container text-center mx-auto p-3 pt-8">
           <h2 className="text-white text-2xl font-bold">Latest Movies</h2>
         </div>
-        <ContentTiles content={movies.results} cardAction={'add'} />
+        <div className="w-full container text-center mx-auto p-3 pt-8">
+          <ContentTiles contentType='Movie' content={movies.results} cardAction={'add'} />
+        </div>
       </UserContentProvider>
     </main>
   );
