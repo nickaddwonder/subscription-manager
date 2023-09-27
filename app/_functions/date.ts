@@ -8,7 +8,7 @@ const date = (content: Movie | TvShow): Date => {
     return new Date(content.first_air_date);
   } else {
     throw new Error(
-      'Content Type does not contain a release dateor a first air date'
+      'Content Type does not contain a release date or a first air date'
     );
   }
 };
