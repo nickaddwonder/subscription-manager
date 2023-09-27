@@ -53,6 +53,12 @@ const Home = async () => {
             contentType='Movie'
             date={new Date()}
             description='description here'
+            image={{
+              src: `${process.env.NEXT_PUBLIC_TMDB_IMAGE_URL_BASE}/w500${tvShows.results[0].backdrop_path}`,
+              alt: 'somethng',
+              width: 500,
+              height: 500
+            }}
             buttons={[
               {
                 buttonType: 'secondary',

@@ -1,4 +1,7 @@
-import { FC, ComponentProps } from "react";
+'use client'
+
+import Image from "next/image";
+import { FC, ComponentProps, useState } from "react";
 import Pill from "@/app/_components/Pill/Pill";
 import Button from "@/app/_components/Button/Button";
 
@@ -7,13 +10,24 @@ type Props = {
   contentType: 'Movie' | 'TV',
   date: Date;
   description: string;
+  image: ComponentProps<typeof Image>;
   buttons?: ComponentProps<typeof Button>[];
 };
 
-const Tile: FC<Props> = ({ title, contentType, date, description, buttons }) => {
+const Tile: FC<Props> = ({ title, contentType, date, description, image, buttons }) => {
+  const [src, setSrc] = useState(image.src);
   return (
     <div className="tile flex flex-col text-left">
-      <div className="bg-red-800">image</div>
+      <div className="bg-red-800">
+        <Image
+          className="z-1 min-w-full min-h-full object-cover"
+          src={src}
+          alt={image.alt}
+          width={image.width}
+          height={image.height}
+          onError={() => setSrc('/public/images/default_poster.jpg')}
+        />
+      </div>
       <div className="bg-[#667085] p-4">
         <div className="flex justify-between items-start">
           <h2 className="text-white mb-1 text-xl font-bold leading-tight">{title}</h2>
