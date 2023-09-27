@@ -2,7 +2,6 @@ import Header from '@/app/_components/Header/Header';
 import ContentTiles from '@/app/_components/ContentTiles/ContentTiles';
 import { UserContentProvider } from '@/app/_context/UserContentContext';
 import UserContentList from '@/app/_components/UserContentList/UserContentList';
-import Tile from './_components/Tile/Tile';
 
 async function getLatestTvShows() {
   const res = await fetch(
@@ -52,6 +51,8 @@ const Home = async () => {
         </div>
         <div className="w-full container text-center mx-auto p-3 pt-8">
           <h2 className="text-white text-2xl font-bold">Latest TV Shows</h2>
+        </div>
+        <div className="w-full container text-center mx-auto p-3 pt-8">
           <ContentTiles contentType='TV' content={tvShows.results} cardAction={'add'} />
         </div>
         <div className="w-full container text-center mx-auto p-3 pt-8">
