@@ -9,7 +9,6 @@ const addContentToDatabase = async (
 ): Promise<{ success: Boolean; docRef?: DocumentReference; error?: Error }> => {
   try {
     const docRef = await addDoc(collection(database, collectionName), content);
-    debugger;
     return { success: true, docRef };
   } catch (error) {
     console.error('Error adding document:', error);
