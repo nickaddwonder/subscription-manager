@@ -9,11 +9,11 @@ import { useUserContent } from '@context/UserContentContext';
 import addToContentList from '@functions/addToContentList';
 import removeFromContentList from '@functions/removeFromContentList';
 import authenticateUser from '@functions/authenticateUser';
-import addContentToDatabase from '@functions/addContentToDatabase/addContentToDatabase/addContentToDatabase';
+import addContentToDatabase from '@functions/addContentToDatabase/addContentToDatabase';
 import removeContentFromDatabase from '@functions/removeContentFromDatabase';
-import Tile from '@/app/_components/Tile/Tile';
-import ContentType from '@/app/_types/ContentType';
-import date from '@/app/_functions/date';
+import Tile from '@components/Tile/Tile';
+import ContentType from '@customTypes/ContentType';
+import date from '@functions/date';
 
 type Props = {
   content: TvShow[] | Movie[];
