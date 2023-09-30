@@ -3,7 +3,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import authenticateUser from '../authenticateUser';
 import { database } from '@/firebase';
 import { UserResource } from '@clerk/types';
-import addContentListToDatabase from '../addContentListToDatabase/addContentListToDatabase';
+import addContentList from '../addContentList/addContentList';
 
 interface loadContentList {
   token: string;
@@ -30,7 +30,7 @@ const loadContentList = async ({
           setContentList(doc.data().content);
         });
       } else {
-        const doc = await addContentListToDatabase({
+        const doc = await addContentList({
           user_id: user.id,
           content: [],
         });

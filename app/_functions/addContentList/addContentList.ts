@@ -3,7 +3,7 @@ import FirestoreReturn from '@/_types/FirestoreReturn';
 import { database } from '@/firebase';
 import { addDoc, collection } from 'firebase/firestore';
 
-const addContentListToDatabase = async (
+const addContentList = async (
   content_list: ContentList
 ): Promise<FirestoreReturn> => {
   try {
@@ -18,4 +18,4 @@ const addContentListToDatabase = async (
   }
 };
 
-export default addContentListToDatabase;
+export default addContentList;
