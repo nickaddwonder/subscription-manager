@@ -14,6 +14,7 @@ import removeContentFromDatabase from '@functions/removeContentFromDatabase';
 import Tile from '@components/Tile/Tile';
 import ContentType from '@customTypes/ContentType';
 import date from '@functions/date';
+import addContentToContentList from '@/_functions/addContentToContentList/addContentToContentList';
 
 type Props = {
   content: TvShow[] | Movie[];
@@ -23,12 +24,16 @@ type Props = {
 
 const ContentTiles: FC<Props> = ({ content, contentType, cardAction }) => {
 
-  const { token, setContentList } = useUserContent();
+  const { token, setContentList, contentListId } = useUserContent();
   const handleClick = async (c: TvShow | Movie) => {
     if (await authenticateUser(token)) {
       if (cardAction === 'add') {
-        const doc = addContentToContentDocument(c, 'contents');
-        addToContentList({ ...c, fid: (await doc).docRef?.id as string }, setContentList);
+        const doc = await addContentToContentDocument(c, 'contents');
+        if (doc.success && doc.docRef) {
+          addContentToContentList({ contentListId, contentId: doc.docRef.id });
+          addToContentList({ ...c, fid: doc.docRef.id as string }, setContentList);
+        }
+
       } else if (cardAction === 'remove') {
         removeContentFromDatabase((c as ((TvShow & { fid: string }) | Movie & { fid: string })), 'contents');
         removeFromContentList(c, setContentList);
