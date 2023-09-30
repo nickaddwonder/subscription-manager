@@ -8,9 +8,13 @@ import {
   useEffect,
   ReactNode,
 } from 'react';
-import { useAuth } from '@clerk/nextjs';
+import { useAuth, useUser } from '@clerk/nextjs';
 import documentExists from '@/_functions/documentExists/documentExists';
 import authenticateUser from '@/_functions/authenticateUser';
+import { database } from '@/firebase';
+import { query, where, collection, getDocs, addDoc } from 'firebase/firestore';
+import addContentToDatabase from '@/_functions/addContentToDatabase/addContentToDatabase';
+import addContentListToDatabase from '@/_functions/addContentListToDatabase/addContentListToDatabase';
 
 type Props = {
   children: ReactNode;
@@ -24,11 +28,11 @@ export const useUserContent = () => {
 
 export const UserContentProvider: FC<Props> = ({ children }) => {
 
+  const { user } = useUser();
   const { getToken } = useAuth();
   const [contentList, setContentList] = useState(
     []
   );
-  //<TvShow[] | Movie[]>
   const [token, setToken] = useState<string | null>(null)
   useEffect(() => {
     const fetchToken = async () => {
@@ -42,14 +46,27 @@ export const UserContentProvider: FC<Props> = ({ children }) => {
     fetchToken();
   }, [getToken]);
 
-  // useEffect(() => {
-  //   const ram = async () => {
-  //     if (await authenticateUser(token!)) {
-  //       const ran = await documentExists('content_lists/M2TAeXMLWAXlbHVR5v6I');
-  //     }
-  //   }
-  //   ram();
-  // }, [token]);
+  useEffect(() => {
+    if (token && user) {
+      const loadContentList = async () => {
+        if (await authenticateUser(token)) {
+          try {
+            const contentListQuery = await query(collection(database, 'content_lists'), where('user_id', '==', user.id));
+            const querySnapshot = await getDocs(contentListQuery);
+            if (querySnapshot.size > 0) {
+
+              querySnapshot.forEach(doc => setContentList(doc.data().content));
+            } else {
+              const doc = addContentListToDatabase({ user_id: user.id, content: [] });
+            }
+          } catch (error) {
+            console.error("Failed to get content list:", error);
+          }
+        }
+      }
+      loadContentList();
+    }
+  }, [token]);
   const value = { contentList, setContentList, token };
   return (
     <UserContentContext.Provider value={value}>

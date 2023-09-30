@@ -1,12 +1,13 @@
 import Movie from '@customTypes/Movie';
 import TvShow from '@customTypes/TvShow';
 import { database } from '@/firebase';
-import { DocumentReference, addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection } from 'firebase/firestore';
+import FirestoreReturn from '@/_types/FirestoreReturn';
 
 const addContentToDatabase = async (
   content: TvShow | Movie,
   collectionName: string
-): Promise<{ success: Boolean; docRef?: DocumentReference; error?: Error }> => {
+): Promise<FirestoreReturn> => {
   try {
     const docRef = await addDoc(collection(database, collectionName), content);
     return { success: true, docRef };
