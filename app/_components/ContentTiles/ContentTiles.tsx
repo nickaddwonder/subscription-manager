@@ -10,7 +10,7 @@ import addToContentList from '@functions/addToContentList';
 import removeFromContentList from '@functions/removeFromContentList';
 import authenticateUser from '@functions/authenticateUser';
 import addContentToContentsDocument from '@/_functions/addContentToContentsDocument/addContentToContentsDocument';
-import removeContentFromDatabase from '@functions/removeContentFromDatabase';
+import removeContentFromDatabase from '@/_functions/removeContentFromContentsDocument/removeContentFromContentsDocument';
 import Tile from '@components/Tile/Tile';
 import ContentType from '@customTypes/ContentType';
 import date from '@functions/date';
