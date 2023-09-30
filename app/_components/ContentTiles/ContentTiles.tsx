@@ -9,7 +9,7 @@ import { useUserContent } from '@context/UserContentContext';
 import addToContentList from '@functions/addToContentList';
 import removeFromContentList from '@functions/removeFromContentList';
 import authenticateUser from '@functions/authenticateUser';
-import addContentToContentDocument from '@/_functions/addContentToContentDocument/addContentToContentDocument';
+import addContentToContentDocument from '@/_functions/addContentToContentsDocument/addContentToContentsDocument';
 import removeContentFromDatabase from '@functions/removeContentFromDatabase';
 import Tile from '@components/Tile/Tile';
 import ContentType from '@customTypes/ContentType';

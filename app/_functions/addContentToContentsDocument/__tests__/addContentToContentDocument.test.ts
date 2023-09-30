@@ -1,4 +1,4 @@
-import addContentToContentDocument from '../addContentToContentDocument';
+import addContentToContentDocument from '../addContentToContentsDocument';
 import { database } from '@/firebase';
 import { addDoc, collection } from 'firebase/firestore';
 import TvShow from '@customTypes/TvShow';

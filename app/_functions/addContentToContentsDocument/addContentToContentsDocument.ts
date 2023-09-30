@@ -4,7 +4,7 @@ import { database } from '@/firebase';
 import { addDoc, collection } from 'firebase/firestore';
 import FirestoreReturn from '@/_types/FirestoreReturn';
 
-const addContentToContentDocument = async (
+const addContentToContentsDocument = async (
   content: TvShow | Movie,
   collectionName: string
 ): Promise<FirestoreReturn> => {
@@ -17,4 +17,4 @@ const addContentToContentDocument = async (
   }
 };
 
-export default addContentToContentDocument;
+export default addContentToContentsDocument;
