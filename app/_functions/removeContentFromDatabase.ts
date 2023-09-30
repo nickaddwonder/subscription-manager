@@ -3,7 +3,7 @@ import { database } from '@/firebase';
 import Movie from '@customTypes/Movie';
 import TvShow from '@customTypes/TvShow';
 
-const removeContentFromDatabase = async (
+const removeContentFromContentsDocument = async (
   content: (TvShow & { fid: string }) | (Movie & { fid: string }),
   collectionName: string
 ) => {
@@ -17,4 +17,4 @@ const removeContentFromDatabase = async (
   }
 };
 
-export default removeContentFromDatabase;
+export default removeContentFromContentsDocument;
