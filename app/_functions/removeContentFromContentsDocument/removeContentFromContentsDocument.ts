@@ -4,11 +4,10 @@ import Movie from '@customTypes/Movie';
 import TvShow from '@customTypes/TvShow';
 
 const removeContentFromContentsDocument = async (
-  content: (TvShow & { fid: string }) | (Movie & { fid: string }),
-  collectionName: string
+  content: (TvShow & { fid: string }) | (Movie & { fid: string })
 ) => {
   try {
-    const docRef = doc(database, collectionName, content.fid);
+    const docRef = doc(database, 'contents', content.fid);
     await deleteDoc(docRef);
     return { success: true };
   } catch (error) {
