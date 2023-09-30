@@ -5,11 +5,10 @@ import { addDoc, collection } from 'firebase/firestore';
 import FirestoreReturn from '@/_types/FirestoreReturn';
 
 const addContentToContentsDocument = async (
-  content: TvShow | Movie,
-  collectionName: string
+  content: TvShow | Movie
 ): Promise<FirestoreReturn> => {
   try {
-    const docRef = await addDoc(collection(database, collectionName), content);
+    const docRef = await addDoc(collection(database, 'contents'), content);
     return { success: true, docRef };
   } catch (error) {
     console.error('Error adding document:', error);

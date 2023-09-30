@@ -9,7 +9,7 @@ import { useUserContent } from '@context/UserContentContext';
 import addToContentList from '@functions/addToContentList';
 import removeFromContentList from '@functions/removeFromContentList';
 import authenticateUser from '@functions/authenticateUser';
-import addContentToContentDocument from '@/_functions/addContentToContentsDocument/addContentToContentsDocument';
+import addContentToContentsDocument from '@/_functions/addContentToContentsDocument/addContentToContentsDocument';
 import removeContentFromDatabase from '@functions/removeContentFromDatabase';
 import Tile from '@components/Tile/Tile';
 import ContentType from '@customTypes/ContentType';
@@ -28,7 +28,7 @@ const ContentTiles: FC<Props> = ({ content, contentType, cardAction }) => {
   const handleClick = async (c: TvShow | Movie) => {
     if (await authenticateUser(token)) {
       if (cardAction === 'add') {
-        const doc = await addContentToContentDocument(c, 'contents');
+        const doc = await addContentToContentsDocument(c);
         if (doc.success && doc.docRef) {
           addContentToContentList({ contentListId, contentId: doc.docRef.id });
           addToContentList({ ...c, fid: doc.docRef.id as string }, setContentList);
