@@ -30,6 +30,7 @@ export const UserContentProvider: FC<Props> = ({ children }) => {
 
   const { user } = useUser();
   const { getToken } = useAuth();
+  const [contentListId, setContentListId] = useState('');
   const [contentList, setContentList] = useState(
     []
   );
@@ -54,10 +55,15 @@ export const UserContentProvider: FC<Props> = ({ children }) => {
             const contentListQuery = await query(collection(database, 'content_lists'), where('user_id', '==', user.id));
             const querySnapshot = await getDocs(contentListQuery);
             if (querySnapshot.size > 0) {
-
-              querySnapshot.forEach(doc => setContentList(doc.data().content));
+              querySnapshot.forEach(doc => {
+                setContentListId(doc.id);
+                setContentList(doc.data().content);
+              });
             } else {
-              const doc = addContentListToDatabase({ user_id: user.id, content: [] });
+              const doc = await addContentListToDatabase({ user_id: user.id, content: [] });
+              if (doc.success) {
+                setContentListId(doc.docRef!.id);
+              }
             }
           } catch (error) {
             console.error("Failed to get content list:", error);
@@ -67,7 +73,7 @@ export const UserContentProvider: FC<Props> = ({ children }) => {
       loadContentList();
     }
   }, [token]);
-  const value = { contentList, setContentList, token };
+  const value = { contentList, setContentList, contentListId, token };
   return (
     <UserContentContext.Provider value={value}>
       {children}
