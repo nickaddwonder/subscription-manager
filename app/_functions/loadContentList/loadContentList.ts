@@ -39,7 +39,7 @@ const loadContentList = async ({
         }
       }
     } catch (error) {
-      console.error('Faild to load content list:', error);
+      console.error('Failed to load content list:', error);
     }
   }
 };
