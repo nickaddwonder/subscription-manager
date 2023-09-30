@@ -43,10 +43,7 @@ describe('addContentToContentDocument', () => {
 
     (addDoc as jest.Mock).mockResolvedValueOnce(mockDocRef);
 
-    const result = await addContentToContentDocument(
-      mockTvShow,
-      'some-collection'
-    );
+    const result = await addContentToContentDocument(mockTvShow);
 
     expect(result).toEqual({
       success: true,
@@ -76,10 +73,7 @@ describe('addContentToContentDocument', () => {
 
     (addDoc as jest.Mock).mockRejectedValueOnce(mockError);
 
-    const result = await addContentToContentDocument(
-      mockTvShow,
-      'some-collection'
-    );
+    const result = await addContentToContentDocument(mockTvShow);
 
     expect(result).toEqual({
       success: false,
