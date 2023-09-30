@@ -1,6 +1,4 @@
-// addContentToDatabase.test.ts
-
-import addContentToDatabase from '../addContentToDatabase';
+import addContentToContentDocument from '../addContentToContentDocument';
 import { database } from '@/firebase';
 import { addDoc, collection } from 'firebase/firestore';
 import TvShow from '@customTypes/TvShow';
@@ -20,7 +18,7 @@ jest.mock('firebase/firestore', () => ({
   }),
 }));
 
-describe('addContentToDatabase', () => {
+describe('addContentToContentDocument', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -45,7 +43,10 @@ describe('addContentToDatabase', () => {
 
     (addDoc as jest.Mock).mockResolvedValueOnce(mockDocRef);
 
-    const result = await addContentToDatabase(mockTvShow, 'some-collection');
+    const result = await addContentToContentDocument(
+      mockTvShow,
+      'some-collection'
+    );
 
     expect(result).toEqual({
       success: true,
@@ -75,7 +76,10 @@ describe('addContentToDatabase', () => {
 
     (addDoc as jest.Mock).mockRejectedValueOnce(mockError);
 
-    const result = await addContentToDatabase(mockTvShow, 'some-collection');
+    const result = await addContentToContentDocument(
+      mockTvShow,
+      'some-collection'
+    );
 
     expect(result).toEqual({
       success: false,

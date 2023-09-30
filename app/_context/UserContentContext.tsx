@@ -9,12 +9,7 @@ import {
   ReactNode,
 } from 'react';
 import { useAuth, useUser } from '@clerk/nextjs';
-import documentExists from '@/_functions/documentExists/documentExists';
-import authenticateUser from '@/_functions/authenticateUser';
-import { database } from '@/firebase';
-import { query, where, collection, getDocs, addDoc } from 'firebase/firestore';
-import addContentToDatabase from '@/_functions/addContentToDatabase/addContentToDatabase';
-import addContentListToDatabase from '@/_functions/addContentListToDatabase/addContentListToDatabase';
+import loadContentList from '@/_functions/loadContentList/loadContentList';
 
 type Props = {
   children: ReactNode;
@@ -49,28 +44,7 @@ export const UserContentProvider: FC<Props> = ({ children }) => {
 
   useEffect(() => {
     if (token && user) {
-      const loadContentList = async () => {
-        if (await authenticateUser(token)) {
-          try {
-            const contentListQuery = await query(collection(database, 'content_lists'), where('user_id', '==', user.id));
-            const querySnapshot = await getDocs(contentListQuery);
-            if (querySnapshot.size > 0) {
-              querySnapshot.forEach(doc => {
-                setContentListId(doc.id);
-                setContentList(doc.data().content);
-              });
-            } else {
-              const doc = await addContentListToDatabase({ user_id: user.id, content: [] });
-              if (doc.success) {
-                setContentListId(doc.docRef!.id);
-              }
-            }
-          } catch (error) {
-            console.error("Failed to get content list:", error);
-          }
-        }
-      }
-      loadContentList();
+      loadContentList({ token, user, setContentListId, setContentList });
     }
   }, [token]);
   const value = { contentList, setContentList, contentListId, token };
