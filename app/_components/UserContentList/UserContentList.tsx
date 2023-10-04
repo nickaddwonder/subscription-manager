@@ -11,13 +11,15 @@ import { v4 as uuid } from 'uuid';
 import removeContentFromContentListsDocument from '@/_functions/removeContentFromContentListsDocument/removeContentFromContentLIstsDocument';
 
 const UserContentList: FC = () => {
-  const { token, activeContentList, setActiveContentList, contentListId } = useUserContent();
+  const { token, contentList, setContentList, activeContentList, setActiveContentList, contentListId } = useUserContent();
 
   const handleClick = async (c: TvShow & { fid: string } | Movie & { fid: string }) => {
     if (await authenticateUser(token)) {
       removeContentFromContentListsDocument({ contentId: c.fid, contentListId });
+      setActiveContentList([]);
+      setContentList(list => list.filter(l => l !== c.fid));
       //removeFromContentList(c, setContentList);
-      setActiveContentList((list: (TvShow & { fid: string } | Movie & { fid: string })[]) => list.filter(l => l.id !== c.id));
+      //setActiveContentList((list: (TvShow & { fid: string } | Movie & { fid: string })[]) => list.filter(l => l.id !== c.id));
     }
   }
 
