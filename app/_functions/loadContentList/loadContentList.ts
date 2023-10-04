@@ -9,7 +9,7 @@ interface loadContentList {
   token: string;
   user: UserResource;
   setContentListId: Dispatch<SetStateAction<string>>;
-  setContentList: Dispatch<SetStateAction<never[]>>;
+  setContentList: Dispatch<SetStateAction<string[]>>;
 }
 const loadContentList = async ({
   token,

@@ -6,12 +6,12 @@ import { database } from '@/firebase';
 import TvShow from '@/_types/TvShow';
 import Movie from '@/_types/Movie';
 import authenticateUser from '@/_functions/authenticateUser';
-import removeContentFromContentsDocument from '@/_functions/removeContentFromContentsDocument/removeContentFromContentsDocument';
 import removeFromContentList from '@/_functions/removeFromContentList';
 import Tile from '../Tile/Tile';
 import title from '@/_functions/title';
 import date from '@/_functions/date';
 import { v4 as uuid } from 'uuid';
+import removeContentFromContentListsDocument from '@/_functions/removeContentFromContentListsDocument/removeContentFromContentLIstsDocument';
 
 const UserContentList: FC = () => {
   const { token, contentList, setContentList, contentListId } = useUserContent();
@@ -19,26 +19,25 @@ const UserContentList: FC = () => {
   const [activeContentList, setActiveContentList] = useState([] as any[]);
 
   useEffect(() => {
-    const ram = async () => {
+    const loadCurrentContentList = async () => {
       if (contentList.length > 0) {
-        contentList.forEach(async (content) => {
-          console.log(content);
+        contentList.forEach(async (content: string) => {
           const docRef = doc(database, 'contents', content);
           const docSnap = await getDoc(docRef);
-          await setActiveContentList(list => [...list, docSnap.data()]);
+          console.log(docSnap.data());
+          await setActiveContentList(list => [...list, { fid: content, ...docSnap.data() }]);
         });
       }
 
     };
-    ram();
+    loadCurrentContentList();
   }, [contentList]);
 
-  const handleClick = async (c: TvShow | Movie) => {
+  const handleClick = async (c: TvShow & { fid: string } | Movie & { fid: string }) => {
     if (await authenticateUser(token)) {
-
-      removeContentFromContentsDocument((c as ((TvShow & { fid: string }) | Movie & { fid: string })));
-      removeFromContentList(c, setContentList);
-
+      removeContentFromContentListsDocument({ contentId: c.fid, contentListId });
+      //removeFromContentList(c, setContentList);
+      setActiveContentList(list => list.filter(l => l.id !== c.id));
     }
   }
 

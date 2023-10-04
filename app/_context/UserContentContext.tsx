@@ -26,7 +26,7 @@ export const UserContentProvider: FC<Props> = ({ children }) => {
   const { user } = useUser();
   const { getToken } = useAuth();
   const [contentListId, setContentListId] = useState('');
-  const [contentList, setContentList] = useState(
+  const [contentList, setContentList] = useState<string[]>(
     []
   );
   const [token, setToken] = useState<string | null>(null)
