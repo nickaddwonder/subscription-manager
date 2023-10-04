@@ -7,36 +7,28 @@ import { v4 as uuid } from 'uuid';
 import title from '@functions/title';
 import { useUserContent } from '@context/UserContentContext';
 import addToContentList from '@functions/addToContentList';
-import removeFromContentList from '@functions/removeFromContentList';
 import authenticateUser from '@functions/authenticateUser';
 import addContentToContentsDocument from '@/_functions/addContentToContentsDocument/addContentToContentsDocument';
-import removeContentFromDatabase from '@/_functions/removeContentFromContentsDocument/removeContentFromContentsDocument';
 import Tile from '@components/Tile/Tile';
 import ContentType from '@customTypes/ContentType';
 import date from '@functions/date';
-import addContentToContentList from '@/_functions/addContentToContentList/addContentToContentList';
+import addContentToContentListsDocument from '@/_functions/addContentToContentListsDocument/addContentToContentListsDocument';
 
 type Props = {
   content: TvShow[] | Movie[];
   contentType?: ContentType;
-  cardAction?: 'add' | 'remove'
 };
 
-const ContentTiles: FC<Props> = ({ content, contentType, cardAction }) => {
-
+const ContentTiles: FC<Props> = ({ content, contentType }) => {
   const { token, setContentList, contentListId } = useUserContent();
   const handleClick = async (c: TvShow | Movie) => {
     if (await authenticateUser(token)) {
-      if (cardAction === 'add') {
-        const doc = await addContentToContentsDocument(c);
-        if (doc.success && doc.docRef) {
-          addContentToContentList({ contentListId, contentId: doc.docRef.id });
-          addToContentList({ ...c, fid: doc.docRef.id as string }, setContentList);
-        }
-      } else if (cardAction === 'remove') {
-        removeContentFromDatabase((c as ((TvShow & { fid: string }) | Movie & { fid: string })));
-        removeFromContentList(c, setContentList);
+      const doc = await addContentToContentsDocument(c);
+      if (doc.success && doc.docRef) {
+        addContentToContentListsDocument({ contentListId, contentId: doc.docRef.id });
+        addToContentList({ ...c, fid: doc.docRef.id as string }, setContentList);
       }
+
     }
   }
 
