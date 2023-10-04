@@ -20,7 +20,7 @@ type Props = {
 };
 
 const ContentTiles: FC<Props> = ({ content, contentType }) => {
-  const { token, setContentList, contentListId } = useUserContent();
+  const { token, setContentList, contentListId, setActiveContentList } = useUserContent();
   const handleClick = async (c: TvShow | Movie) => {
     if (await authenticateUser(token)) {
       const doc = await addContentToContentsDocument(c);
@@ -28,7 +28,6 @@ const ContentTiles: FC<Props> = ({ content, contentType }) => {
         addContentToContentListsDocument({ contentListId, contentId: doc.docRef.id });
         addToContentList({ ...c, fid: doc.docRef.id as string }, setContentList);
       }
-
     }
   }
 

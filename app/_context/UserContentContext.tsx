@@ -10,6 +10,10 @@ import {
 } from 'react';
 import { useAuth, useUser } from '@clerk/nextjs';
 import loadContentList from '@/_functions/loadContentList/loadContentList';
+import { doc, getDoc } from 'firebase/firestore';
+import { database } from '@/firebase';
+import TvShow from '@/_types/TvShow';
+import Movie from '@/_types/Movie';
 
 type Props = {
   children: ReactNode;
@@ -29,6 +33,7 @@ export const UserContentProvider: FC<Props> = ({ children }) => {
   const [contentList, setContentList] = useState<string[]>(
     []
   );
+  const [activeContentList, setActiveContentList] = useState<(TvShow & { fid: string } | Movie & { fid: string })[] | null[] | any[]>([]);
   const [token, setToken] = useState<string | null>(null)
   useEffect(() => {
     const fetchToken = async () => {
@@ -47,7 +52,20 @@ export const UserContentProvider: FC<Props> = ({ children }) => {
       loadContentList({ token, user, setContentListId, setContentList });
     }
   }, [token]);
-  const value = { contentList, setContentList, contentListId, token };
+
+  useEffect(() => {
+    const loadCurrentContentList = async () => {
+      if (contentList.length > 0) {
+        contentList.forEach(async (content: string) => {
+          const docRef = doc(database, 'contents', content);
+          const docSnap = await getDoc(docRef);
+          setActiveContentList(list => [...list, { fid: content, ...docSnap.data() }]);
+        });
+      }
+    };
+    loadCurrentContentList();
+  }, [contentList]);
+  const value = { contentList, setContentList, contentListId, activeContentList, setActiveContentList, token };
   return (
     <UserContentContext.Provider value={value}>
       {children}

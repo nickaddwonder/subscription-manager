@@ -1,12 +1,9 @@
 'use client';
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { useUserContent } from '@context/UserContentContext';
-import { doc, getDoc } from 'firebase/firestore';
-import { database } from '@/firebase';
 import TvShow from '@/_types/TvShow';
 import Movie from '@/_types/Movie';
 import authenticateUser from '@/_functions/authenticateUser';
-import removeFromContentList from '@/_functions/removeFromContentList';
 import Tile from '../Tile/Tile';
 import title from '@/_functions/title';
 import date from '@/_functions/date';
@@ -14,30 +11,13 @@ import { v4 as uuid } from 'uuid';
 import removeContentFromContentListsDocument from '@/_functions/removeContentFromContentListsDocument/removeContentFromContentLIstsDocument';
 
 const UserContentList: FC = () => {
-  const { token, contentList, setContentList, contentListId } = useUserContent();
-
-  const [activeContentList, setActiveContentList] = useState([] as any[]);
-
-  useEffect(() => {
-    const loadCurrentContentList = async () => {
-      if (contentList.length > 0) {
-        contentList.forEach(async (content: string) => {
-          const docRef = doc(database, 'contents', content);
-          const docSnap = await getDoc(docRef);
-          console.log(docSnap.data());
-          await setActiveContentList(list => [...list, { fid: content, ...docSnap.data() }]);
-        });
-      }
-
-    };
-    loadCurrentContentList();
-  }, [contentList]);
+  const { token, activeContentList, setActiveContentList, contentListId } = useUserContent();
 
   const handleClick = async (c: TvShow & { fid: string } | Movie & { fid: string }) => {
     if (await authenticateUser(token)) {
       removeContentFromContentListsDocument({ contentId: c.fid, contentListId });
       //removeFromContentList(c, setContentList);
-      setActiveContentList(list => list.filter(l => l.id !== c.id));
+      setActiveContentList((list: (TvShow & { fid: string } | Movie & { fid: string })[]) => list.filter(l => l.id !== c.id));
     }
   }
 
