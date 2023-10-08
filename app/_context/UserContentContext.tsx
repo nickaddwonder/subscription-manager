@@ -29,6 +29,7 @@ export const UserContentProvider: FC<Props> = ({ children }) => {
 
   const { user } = useUser();
   const { getToken } = useAuth();
+  const [contentListLoaded, setContentListLoaded] = useState(false);
   const [contentListId, setContentListId] = useState('');
   const [contentList, setContentList] = useState<string[]>(
     []
@@ -49,22 +50,22 @@ export const UserContentProvider: FC<Props> = ({ children }) => {
 
   useEffect(() => {
     if (token && user) {
-      loadContentList({ token, user, setContentListId, setContentList });
+      loadContentList({ token, user, setContentListId, setContentList: setActiveContentList });
     }
   }, [token]);
 
-  useEffect(() => {
-    const loadCurrentContentList = async () => {
-      if (contentList.length > 0) {
-        contentList.forEach(async (content: string) => {
-          const docRef = doc(database, 'contents', content);
-          const docSnap = await getDoc(docRef);
-          setActiveContentList(list => [...list, { fid: content, ...docSnap.data() }]);
-        });
-      }
-    };
-    loadCurrentContentList();
-  }, [contentList]);
+  // useEffect(() => {
+  //   const loadCurrentContentList = async () => {
+  //     if (contentList.length > 0) {
+  //       contentList.forEach(async (content: string) => {
+  //         const docRef = doc(database, 'contents', content);
+  //         const docSnap = await getDoc(docRef);
+  //         setActiveContentList(list => [...list, { fid: content, ...docSnap.data() }]);
+  //       });
+  //     }
+  //   };
+  //   loadCurrentContentList();
+  // }, [contentList]);
   const value = { contentList, setContentList, contentListId, activeContentList, setActiveContentList, token };
   return (
     <UserContentContext.Provider value={value}>

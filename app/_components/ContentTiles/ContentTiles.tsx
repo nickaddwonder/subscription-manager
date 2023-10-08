@@ -26,7 +26,7 @@ const ContentTiles: FC<Props> = ({ content, contentType }) => {
       const doc = await addContentToContentsDocument(c);
       if (doc.success && doc.docRef) {
         addContentToContentListsDocument({ contentListId, contentId: doc.docRef.id });
-        setActiveContentList([]);
+        //setActiveContentList([]);
         setContentList(list => [...list, doc.docRef?.id]);
         // addToContentList({ ...c, fid: doc.docRef.id as string }, setContentList);
       }

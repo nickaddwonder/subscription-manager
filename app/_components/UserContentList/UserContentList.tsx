@@ -17,7 +17,7 @@ const UserContentList: FC = () => {
     if (await authenticateUser(token)) {
       removeContentFromContentListsDocument({ contentId: c.fid, contentListId });
       setActiveContentList([]);
-      setContentList(list => list.filter(l => l !== c.fid));
+      //setContentList(list => list.filter(l => l !== c.fid));
       //removeFromContentList(c, setContentList);
       //setActiveContentList((list: (TvShow & { fid: string } | Movie & { fid: string })[]) => list.filter(l => l.id !== c.id));
     }

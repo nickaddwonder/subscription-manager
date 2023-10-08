@@ -1,15 +1,17 @@
 import { Dispatch, SetStateAction } from 'react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
-import authenticateUser from '../authenticateUser';
+import authenticateUser from '@functions/authenticateUser';
 import { database } from '@/firebase';
 import { UserResource } from '@clerk/types';
-import addContentList from '../addContentList/addContentList';
+import addContentList from '@functions/addContentList/addContentList';
+import loadContentToContentList from '@functions/loadContentToContentList/loadContentToContentList';
 
 interface loadContentList {
   token: string;
   user: UserResource;
   setContentListId: Dispatch<SetStateAction<string>>;
-  setContentList: Dispatch<SetStateAction<string[]>>;
+  //setContentList: Dispatch<SetStateAction<string[]>>;
+  setContentList: any;
 }
 const loadContentList = async ({
   token,
@@ -27,7 +29,11 @@ const loadContentList = async ({
       if (querySnapshot.size > 0) {
         querySnapshot.forEach((doc) => {
           setContentListId(doc.id);
-          setContentList(doc.data().content);
+          //setContentList(doc.data().content);
+          loadContentToContentList({
+            contentIds: doc.data().content,
+            setContentList,
+          });
         });
       } else {
         const doc = await addContentList({
