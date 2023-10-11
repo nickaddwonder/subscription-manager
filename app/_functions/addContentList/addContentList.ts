@@ -13,7 +13,7 @@ const addContentList = async (
     );
     return { success: true, docRef };
   } catch (error) {
-    console.error('Error adding document,:', error);
+    console.error('Error adding document:', error);
     return { success: false, error: error as Error };
   }
 };
