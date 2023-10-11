@@ -43,7 +43,6 @@ const Home = async () => {
 
   return (
     <main>
-
       <Header />
       <UserContentProvider>
         <div className="w-full container text-center mx-auto p-3 pt-8">
@@ -53,17 +52,17 @@ const Home = async () => {
           <h2 className="text-white text-2xl font-bold">Latest TV Shows</h2>
         </div>
         <div className="w-full container text-center mx-auto p-3 pt-8">
-          <ContentTiles contentType='TV' content={tvShows.results} cardAction={'add'} />
+          <ContentTiles contentType="TV" content={tvShows.results} />
         </div>
         <div className="w-full container text-center mx-auto p-3 pt-8">
           <h2 className="text-white text-2xl font-bold">Latest Movies</h2>
         </div>
         <div className="w-full container text-center mx-auto p-3 pt-8">
-          <ContentTiles contentType='Movie' content={movies.results} cardAction={'add'} />
+          <ContentTiles contentType="Movie" content={movies.results} />
         </div>
       </UserContentProvider>
     </main>
   );
-}
+};
 
 export default Home;
