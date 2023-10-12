@@ -10,8 +10,8 @@ import {
 } from 'react';
 import { useAuth, useUser } from '@clerk/nextjs';
 import loadContentList from '@/_functions/loadContentList/loadContentList';
-import TvShow from '@/_types/TvShow';
-import Movie from '@/_types/Movie';
+import TvShow from '@/_types/tmdb/TvShow';
+import Movie from '@/_types/tmdb/Movie';
 
 type Props = {
   children: ReactNode;

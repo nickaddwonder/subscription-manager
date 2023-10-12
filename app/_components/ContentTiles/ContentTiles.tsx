@@ -1,12 +1,11 @@
 'use client';
 
 import { FC } from 'react';
-import TvShow from '@customTypes/TvShow';
-import Movie from '@customTypes/Movie';
+import TvShow from '@/_types/tmdb/TvShow';
+import Movie from '@/_types/tmdb/Movie';
 import { v4 as uuid } from 'uuid';
 import title from '@functions/title';
 import { useUserContent } from '@context/UserContentContext';
-import addToContentList from '@functions/addToContentList';
 import authenticateUser from '@functions/authenticateUser';
 import addContentToContentsDocument from '@/_functions/addContentToContentsDocument/addContentToContentsDocument';
 import Tile from '@components/Tile/Tile';
@@ -20,13 +19,7 @@ type Props = {
 };
 
 const ContentTiles: FC<Props> = ({ content, contentType }) => {
-  const {
-    token,
-    contentList,
-    setContentList,
-    contentListId,
-    setActiveContentList,
-  } = useUserContent();
+  const { token, setContentList, contentListId } = useUserContent();
   const handleClick = async (c: TvShow | Movie) => {
     if (await authenticateUser(token)) {
       const doc = await addContentToContentsDocument(c);

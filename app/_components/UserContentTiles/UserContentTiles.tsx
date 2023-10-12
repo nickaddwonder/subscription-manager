@@ -1,8 +1,8 @@
 'use client';
 import { FC } from 'react';
 import { useUserContent } from '@context/UserContentContext';
-import TvShow from '@/_types/TvShow';
-import Movie from '@/_types/Movie';
+import TvShow from '@/_types/tmdb/TvShow';
+import Movie from '@/_types/tmdb/Movie';
 import authenticateUser from '@/_functions/authenticateUser';
 import Tile from '../Tile/Tile';
 import title from '@/_functions/title';

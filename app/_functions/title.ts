@@ -1,5 +1,5 @@
-import Movie from '@customTypes/Movie';
-import TvShow from '@customTypes/TvShow';
+import Movie from '@/_types/tmdb/Movie';
+import TvShow from '@/_types/tmdb/TvShow';
 
 const title = (content: Movie | TvShow): string => {
   if ('name' in content) {

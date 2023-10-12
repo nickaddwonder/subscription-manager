@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
-import TvShow from '@/_types/TvShow';
-import Movie from '@/_types/Movie';
+import TvShow from '@/_types/tmdb/TvShow';
+import Movie from '@/_types/tmdb/Movie';
 import { doc, getDoc } from 'firebase/firestore';
 import { database } from '@/firebase';
 

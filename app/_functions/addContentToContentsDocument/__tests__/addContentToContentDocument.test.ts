@@ -1,7 +1,7 @@
 import addContentToContentDocument from '../addContentToContentsDocument';
 import { database } from '@/firebase';
 import { addDoc, collection } from 'firebase/firestore';
-import TvShow from '@customTypes/TvShow';
+import TvShow from '@/_types/tmdb/TvShow';
 
 // Mock the database and firestore functions
 jest.mock('@/firebase', () => ({

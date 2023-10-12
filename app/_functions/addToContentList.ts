@@ -1,8 +1,8 @@
 'use client';
 
 import { Dispatch, SetStateAction } from 'react';
-import TvShow from '@customTypes/TvShow';
-import Movie from '@customTypes/Movie';
+import TvShow from '@/_types/tmdb/TvShow';
+import Movie from '@/_types/tmdb/Movie';
 
 const addToContentList = async (
   content: (TvShow & { fid: string }) | (Movie & { fid: string }),

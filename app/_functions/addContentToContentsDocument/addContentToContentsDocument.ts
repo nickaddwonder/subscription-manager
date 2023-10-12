@@ -1,5 +1,5 @@
-import Movie from '@customTypes/Movie';
-import TvShow from '@customTypes/TvShow';
+import Movie from '@/_types/tmdb/Movie';
+import TvShow from '@/_types/tmdb/TvShow';
 import { database } from '@/firebase';
 import { addDoc, collection } from 'firebase/firestore';
 import FirestoreReturn from '@/_types/FirestoreReturn';
