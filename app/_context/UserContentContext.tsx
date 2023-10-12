@@ -10,8 +10,8 @@ import {
 } from 'react';
 import { useAuth, useUser } from '@clerk/nextjs';
 import loadContentList from '@/_functions/loadContentList/loadContentList';
-import TvShow from '@/_types/tmdb/TvShow';
-import Movie from '@/_types/tmdb/Movie';
+import FirestoreMovie from '@/_types/FirestoreMovie';
+import FirestoreTvShow from '@/_types/FirestoreTvShow';
 
 type Props = {
   children: ReactNode;
@@ -28,7 +28,7 @@ export const UserContentProvider: FC<Props> = ({ children }) => {
   const { getToken } = useAuth();
   const [contentListId, setContentListId] = useState('');
   const [contentList, setContentList] = useState<
-    ((TvShow & { fid: string }) | (Movie & { fid: string }))[] | []
+    (FirestoreTvShow | FirestoreMovie)[] | []
   >([]);
   const [token, setToken] = useState<string | null>(null);
   useEffect(() => {
