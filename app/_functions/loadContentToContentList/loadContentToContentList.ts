@@ -16,12 +16,12 @@ const loadContentToContentList = ({
   setContentList,
 }: loadContentToContentList) => {
   if (contentIds.length > 0) {
-    contentIds.forEach(async (content) => {
-      const docRef = doc(database, 'contents', content);
+    contentIds.forEach(async (id) => {
+      const docRef = doc(database, 'contents', id);
       const docSnap = await getDoc(docRef);
       setContentList((list) => [
         ...list,
-        { fid: content, ...(docSnap.data() as TvShow | Movie) },
+        { fid: id, ...(docSnap.data() as TvShow | Movie) },
       ]);
     });
   }
