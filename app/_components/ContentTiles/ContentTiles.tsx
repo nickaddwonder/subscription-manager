@@ -12,6 +12,8 @@ import Tile from '@components/Tile/Tile';
 import ContentType from '@customTypes/ContentType';
 import date from '@functions/date';
 import addContentToContentListsDocument from '@/_functions/addContentToContentListsDocument/addContentToContentListsDocument';
+import FirestoreTvShow from '@/_types/FirestoreTvShow';
+import FirestoreMovie from '@/_types/FirestoreMovie';
 
 type Props = {
   content: TvShow[] | Movie[];
@@ -28,7 +30,10 @@ const ContentTiles: FC<Props> = ({ content, contentType }) => {
           contentListId,
           contentId: doc.docRef.id,
         });
-        setContentList((list) => [...list, { ...c, fid: doc.docRef?.id }]);
+        setContentList((list: (FirestoreTvShow | FirestoreMovie)[]) => [
+          ...list,
+          { ...c, fid: doc.docRef?.id },
+        ]);
       }
     }
   };

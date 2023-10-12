@@ -9,6 +9,8 @@ import title from '@/_functions/title';
 import date from '@/_functions/date';
 import { v4 as uuid } from 'uuid';
 import removeContentFromContentListsDocument from '@/_functions/removeContentFromContentListsDocument/removeContentFromContentLIstsDocument';
+import FirestoreMovie from '@/_types/FirestoreMovie';
+import FirestoreTvShow from '@/_types/FirestoreTvShow';
 
 const UserContentTiles: FC = () => {
   const { token, contentList, setContentList, contentListId } =
@@ -22,14 +24,16 @@ const UserContentTiles: FC = () => {
         contentId: c.fid,
         contentListId,
       });
-      setContentList((list) => list.filter((l) => l.fid !== c.fid));
+      setContentList((list: (FirestoreMovie | FirestoreTvShow)[]) =>
+        list.filter((l) => l.fid !== c.fid)
+      );
     }
   };
 
   return (
     <div className="flex w-full flex-wrap -md:mx-3">
       {contentList.length > 0 ? (
-        contentList.map((c) => (
+        contentList.map((c: FirestoreMovie | FirestoreTvShow) => (
           <div
             className="relative w-full md:w-1/2 mb-3 md:mb-6 md:px-3"
             key={uuid()}
