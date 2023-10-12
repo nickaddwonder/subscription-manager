@@ -26,11 +26,9 @@ export const useUserContent = () => {
 export const UserContentProvider: FC<Props> = ({ children }) => {
   const { user } = useUser();
   const { getToken } = useAuth();
-  const [contentListLoaded, setContentListLoaded] = useState(false);
   const [contentListId, setContentListId] = useState('');
-  const [contentList, setContentList] = useState<string[]>([]);
-  const [activeContentList, setActiveContentList] = useState<
-    ((TvShow & { fid: string }) | (Movie & { fid: string }))[] | null[] | any[]
+  const [contentList, setContentList] = useState<
+    ((TvShow & { fid: string }) | (Movie & { fid: string }))[] | []
   >([]);
   const [token, setToken] = useState<string | null>(null);
   useEffect(() => {
@@ -51,29 +49,15 @@ export const UserContentProvider: FC<Props> = ({ children }) => {
         token,
         user,
         setContentListId,
-        setContentList: setActiveContentList,
+        setContentList: setContentList,
       });
     }
   }, [token]);
 
-  // useEffect(() => {
-  //   const loadCurrentContentList = async () => {
-  //     if (contentList.length > 0) {
-  //       contentList.forEach(async (content: string) => {
-  //         const docRef = doc(database, 'contents', content);
-  //         const docSnap = await getDoc(docRef);
-  //         setActiveContentList(list => [...list, { fid: content, ...docSnap.data() }]);
-  //       });
-  //     }
-  //   };
-  //   loadCurrentContentList();
-  // }, [contentList]);
   const value = {
     contentList,
     setContentList,
     contentListId,
-    activeContentList,
-    setActiveContentList,
     token,
   };
   return (

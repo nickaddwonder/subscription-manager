@@ -20,23 +20,33 @@ type Props = {
 };
 
 const ContentTiles: FC<Props> = ({ content, contentType }) => {
-  const { token, contentList, setContentList, contentListId, setActiveContentList } = useUserContent();
+  const {
+    token,
+    contentList,
+    setContentList,
+    contentListId,
+    setActiveContentList,
+  } = useUserContent();
   const handleClick = async (c: TvShow | Movie) => {
     if (await authenticateUser(token)) {
       const doc = await addContentToContentsDocument(c);
       if (doc.success && doc.docRef) {
-        addContentToContentListsDocument({ contentListId, contentId: doc.docRef.id });
-        //setActiveContentList([]);
-        setContentList(list => [...list, doc.docRef?.id]);
-        // addToContentList({ ...c, fid: doc.docRef.id as string }, setContentList);
+        addContentToContentListsDocument({
+          contentListId,
+          contentId: doc.docRef.id,
+        });
+        setContentList((list) => [...list, { ...c, fid: doc.docRef?.id }]);
       }
     }
-  }
+  };
 
   return (
     <div className="flex w-full flex-wrap -md:mx-3">
       {content.map((c) => (
-        <div className="relative w-full md:w-1/2 mb-3 md:mb-6 md:px-3" key={uuid()}>
+        <div
+          className="relative w-full md:w-1/2 mb-3 md:mb-6 md:px-3"
+          key={uuid()}
+        >
           <Tile
             title={title(c)}
             contentType={contentType ?? 'Movie'}
@@ -52,14 +62,14 @@ const ContentTiles: FC<Props> = ({ content, contentType }) => {
               {
                 buttonType: 'primary',
                 children: 'add',
-                onClick: () => handleClick(c)
-              }
+                onClick: () => handleClick(c),
+              },
             ]}
           />
         </div>
       ))}
     </div>
   );
-}
+};
 
 export default ContentTiles;

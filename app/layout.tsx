@@ -17,11 +17,11 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <ReactQueryProvider>
-        <html lang="en">
-          <body className={inter.className}>{children}</body>
-        </html>
-      </ReactQueryProvider>
+      {/* <ReactQueryProvider> */}
+      <html lang="en">
+        <body className={inter.className}>{children}</body>
+      </html>
+      {/* </ReactQueryProvider> */}
     </ClerkProvider>
   );
 }
