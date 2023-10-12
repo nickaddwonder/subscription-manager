@@ -1,5 +1,5 @@
-import Movie from '@/app/_types/Movie';
-import TvShow from '@/app/_types/TvShow';
+import Movie from '@/_types/tmdb/Movie';
+import TvShow from '@/_types/tmdb/TvShow';
 
 const date = (content: Movie | TvShow): Date => {
   if ('release_date' in content) {
@@ -8,7 +8,7 @@ const date = (content: Movie | TvShow): Date => {
     return new Date(content.first_air_date);
   } else {
     throw new Error(
-      'Content Type does not contain a release dateor a first air date'
+      'Content Type does not contain a release date or a first air date'
     );
   }
 };

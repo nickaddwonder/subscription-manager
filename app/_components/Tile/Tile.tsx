@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { FC, ComponentProps, useState } from "react";
-import Pill from "@/app/_components/Pill/Pill";
-import Button from "@/app/_components/Button/Button";
+import Pill from "@components/Pill/Pill";
+import Button from "@components/Button/Button";
 import { v4 as uuid } from "uuid";
 
 type Props = {
