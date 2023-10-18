@@ -43,7 +43,10 @@ const Home = async () => {
 
   return (
     <main>
-      <Header />
+      <Header
+        title={'Search Content'}
+        subtitle={'What are you looking to watch?'}
+      />
       <UserContentProvider>
         <div className="w-full container text-center mx-auto p-3 pt-8">
           <UserContentList />

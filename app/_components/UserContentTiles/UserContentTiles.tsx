@@ -34,10 +34,7 @@ const UserContentTiles: FC = () => {
     <div className="flex w-full flex-wrap -md:mx-3">
       {contentList.length > 0 ? (
         contentList.map((c: FirestoreMovie | FirestoreTvShow) => (
-          <div
-            className="relative w-full md:w-1/2 mb-3 md:mb-6 md:px-3"
-            key={uuid()}
-          >
+          <div className="relative w-full p-3 mb-3 md:mb-0" key={uuid()}>
             <Tile
               title={title(c)}
               contentType={'Movie'}
