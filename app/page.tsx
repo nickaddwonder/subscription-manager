@@ -1,7 +1,6 @@
 import Header from '@components/Header/Header';
 import ContentTiles from '@components/ContentTiles/ContentTiles';
 import { UserContentProvider } from '@context/UserContentContext';
-import UserContentList from '@/_components/UserContentTiles/UserContentTiles';
 
 async function getLatestTvShows() {
   const res = await fetch(
@@ -47,23 +46,18 @@ const Home = async () => {
         title={'Search Content'}
         subtitle={'What are you looking to watch?'}
       />
-      <UserContentProvider>
-        <div className="w-full container text-center mx-auto p-3 pt-8">
-          <UserContentList />
-        </div>
-        <div className="w-full container text-center mx-auto p-3 pt-8">
-          <h2 className="text-white text-2xl font-bold">Latest TV Shows</h2>
-        </div>
-        <div className="w-full container text-center mx-auto p-3 pt-8">
-          <ContentTiles contentType="TV" content={tvShows.results} />
-        </div>
-        <div className="w-full container text-center mx-auto p-3 pt-8">
-          <h2 className="text-white text-2xl font-bold">Latest Movies</h2>
-        </div>
-        <div className="w-full container text-center mx-auto p-3 pt-8">
-          <ContentTiles contentType="Movie" content={movies.results} />
-        </div>
-      </UserContentProvider>
+      <div className="w-full container text-center mx-auto p-3 pt-8">
+        <h2 className="text-white text-2xl font-bold">Latest TV Shows</h2>
+      </div>
+      <div className="w-full container text-center mx-auto p-3 pt-8">
+        <ContentTiles contentType="TV" content={tvShows.results} />
+      </div>
+      <div className="w-full container text-center mx-auto p-3 pt-8">
+        <h2 className="text-white text-2xl font-bold">Latest Movies</h2>
+      </div>
+      <div className="w-full container text-center mx-auto p-3 pt-8">
+        <ContentTiles contentType="Movie" content={movies.results} />
+      </div>
     </main>
   );
 };

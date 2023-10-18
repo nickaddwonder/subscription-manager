@@ -1,15 +1,14 @@
 import Header from '@/_components/Header/Header';
-import { UserContentProvider } from '@/_context/UserContentContext';
 import UserContentTiles from '@/_components/UserContentTiles/UserContentTiles';
 
-const Watchlist = () => {
+const Watchlist = async () => {
   return (
-    <main>
-      <Header title={'Your Watchlist'} subtitle={'Start Watching.'} />
-      <UserContentProvider>
+    <>
+      <main>
+        <Header title={'Your Watchlist'} subtitle={'Start Watching.'} />
         <UserContentTiles />
-      </UserContentProvider>
-    </main>
+      </main>
+    </>
   );
 };
 
