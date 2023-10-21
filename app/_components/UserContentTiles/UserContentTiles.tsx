@@ -8,7 +8,7 @@ import Tile from '../Tile/Tile';
 import title from '@/_functions/title';
 import date from '@/_functions/date';
 import { v4 as uuid } from 'uuid';
-import removeContentFromContentListsDocument from '@/_functions/removeContentFromContentListsDocument/tempName';
+import removeContentFromContentListsDocument from '@/_functions/removeContentFromContentListsDocument/removeContentFromContentListsDocument';
 import FirestoreMovie from '@/_types/FirestoreMovie';
 import FirestoreTvShow from '@/_types/FirestoreTvShow';
 
