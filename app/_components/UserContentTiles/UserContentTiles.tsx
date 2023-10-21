@@ -8,7 +8,7 @@ import Tile from '../Tile/Tile';
 import title from '@/_functions/title';
 import date from '@/_functions/date';
 import { v4 as uuid } from 'uuid';
-import removeContentFromContentListsDocument from '@/_functions/removeContentFromContentListsDocument/removeContentFromContentLIstsDocument';
+import removeContentFromContentListsDocument from '@/_functions/removeContentFromContentListsDocument/removeContentFromContentListsDocument';
 import FirestoreMovie from '@/_types/FirestoreMovie';
 import FirestoreTvShow from '@/_types/FirestoreTvShow';
 
@@ -33,7 +33,7 @@ const UserContentTiles: FC = () => {
   return (
     <div className="flex w-full flex-wrap -md:mx-3">
       {contentList.length > 0 ? (
-        contentList.map((c: FirestoreMovie | FirestoreTvShow) => (
+        contentList.toReversed().map((c: FirestoreMovie | FirestoreTvShow) => (
           <div className="relative w-full p-3 mb-3 md:mb-0" key={uuid()}>
             <Tile
               title={title(c)}

@@ -14,6 +14,9 @@ import date from '@functions/date';
 import addContentToContentListsDocument from '@/_functions/addContentToContentListsDocument/addContentToContentListsDocument';
 import FirestoreTvShow from '@/_types/FirestoreTvShow';
 import FirestoreMovie from '@/_types/FirestoreMovie';
+import removeContentFromContentListsDocument from '@/_functions/removeContentFromContentListsDocument/removeContentFromContentListsDocument';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { database } from '@/firebase';
 
 type Props = {
   content: TvShow[] | Movie[];
@@ -21,7 +24,8 @@ type Props = {
 };
 
 const ContentTiles: FC<Props> = ({ content, contentType }) => {
-  const { token, setContentList, contentListId } = useUserContent();
+  const { token, contentList, setContentList, contentListId } =
+    useUserContent();
   const handleClick = async (c: TvShow | Movie) => {
     if (await authenticateUser(token)) {
       const doc = await addContentToContentsDocument(c);
@@ -36,6 +40,32 @@ const ContentTiles: FC<Props> = ({ content, contentType }) => {
         ]);
       }
     }
+  };
+
+  const handleRemove = async (c: TvShow | Movie) => {
+    if (await authenticateUser(token)) {
+      const contentQuery = query(
+        collection(database, 'contents'),
+        where('id', '==', c.id)
+      );
+      const querySnapshot = await getDocs(contentQuery);
+      const contentId = querySnapshot.docs[0].id;
+      await removeContentFromContentListsDocument({
+        contentListId,
+        contentId,
+      });
+      setContentList((list: (FirestoreTvShow | FirestoreMovie)[]) =>
+        list.filter((l) => l.fid !== contentId)
+      );
+    }
+  };
+
+  const isInContentList = (c: TvShow | Movie) => {
+    const matchingContent = contentList.filter(
+      (content: FirestoreTvShow | FirestoreMovie) => content.id === c.id
+    );
+
+    return !(matchingContent.length === 0);
   };
 
   return (
@@ -59,8 +89,11 @@ const ContentTiles: FC<Props> = ({ content, contentType }) => {
             buttons={[
               {
                 buttonType: 'primary',
-                children: 'add',
-                onClick: () => handleClick(c),
+                children: isInContentList(c)
+                  ? 'in watchlist'
+                  : 'add to watchlist',
+                onClick: () =>
+                  isInContentList(c) ? handleRemove(c) : handleClick(c),
               },
             ]}
           />
