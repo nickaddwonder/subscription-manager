@@ -1,18 +1,26 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { ChangeEvent } from 'react';
+import axios from 'axios';
 
 const SearchBar: FC = () => {
+  const [query, setQuery] = useState('');
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
+    setQuery(e.target.value);
+    console.log(query);
   };
+
+  //   const search = (value:string) => {
+
+  //   };
   return (
     <form className="flex gap-2">
       <input
         type="search"
         className="text-base h-auto min-h-[2.75rem] text-[#101828] bg-white rounded-lg px-3.5 py-2 border border-[#d0d5dd] border-solid grow"
         placeholder="Search something"
+        value={query}
         onChange={handleSearch}
       />
       <button
