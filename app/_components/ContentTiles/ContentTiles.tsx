@@ -21,7 +21,8 @@ type Props = {
 };
 
 const ContentTiles: FC<Props> = ({ content, contentType }) => {
-  const { token, setContentList, contentListId } = useUserContent();
+  const { token, contentList, setContentList, contentListId } =
+    useUserContent();
   const handleClick = async (c: TvShow | Movie) => {
     if (await authenticateUser(token)) {
       const doc = await addContentToContentsDocument(c);
@@ -36,6 +37,14 @@ const ContentTiles: FC<Props> = ({ content, contentType }) => {
         ]);
       }
     }
+  };
+
+  const isInContentList = (c: TvShow | Movie) => {
+    const matchingContent = contentList.filter(
+      (content: FirestoreTvShow | FirestoreMovie) => content.id === c.id
+    );
+
+    return !(matchingContent.length === 0);
   };
 
   return (
@@ -59,7 +68,7 @@ const ContentTiles: FC<Props> = ({ content, contentType }) => {
             buttons={[
               {
                 buttonType: 'primary',
-                children: 'add',
+                children: isInContentList() ? 'remove' : 'add',
                 onClick: () => handleClick(c),
               },
             ]}

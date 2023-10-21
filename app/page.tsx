@@ -1,6 +1,5 @@
 import Header from '@components/Header/Header';
 import ContentTiles from '@components/ContentTiles/ContentTiles';
-import { UserContentProvider } from '@context/UserContentContext';
 
 async function getLatestTvShows() {
   const res = await fetch(
