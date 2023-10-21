@@ -33,7 +33,7 @@ const UserContentTiles: FC = () => {
   return (
     <div className="flex w-full flex-wrap -md:mx-3">
       {contentList.length > 0 ? (
-        contentList.map((c: FirestoreMovie | FirestoreTvShow) => (
+        contentList.toReversed().map((c: FirestoreMovie | FirestoreTvShow) => (
           <div className="relative w-full p-3 mb-3 md:mb-0" key={uuid()}>
             <Tile
               title={title(c)}
