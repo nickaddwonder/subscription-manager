@@ -1,12 +1,19 @@
+'use client';
+
 import { FC } from 'react';
+import { ChangeEvent } from 'react';
 
 const SearchBar: FC = () => {
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(e);
+  };
   return (
-    <div className="flex gap-2">
+    <form className="flex gap-2">
       <input
         type="search"
         className="text-base h-auto min-h-[2.75rem] text-[#101828] bg-white rounded-lg px-3.5 py-2 border border-[#d0d5dd] border-solid grow"
         placeholder="Search something"
+        onChange={handleSearch}
       />
       <button
         className="text-white bg-[#145dfa] rounded-lg py-2.5 px-5 shrink-0"
@@ -14,7 +21,7 @@ const SearchBar: FC = () => {
       >
         Search
       </button>
-    </div>
+    </form>
   );
 };
 
