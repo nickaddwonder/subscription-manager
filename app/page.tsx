@@ -44,6 +44,7 @@ const Home = async () => {
       <Header
         title={'Search Content'}
         subtitle={'What are you looking to watch?'}
+        search={true}
       />
       <div className="w-full container text-center mx-auto p-3 pt-8">
         <h2 className="text-white text-2xl font-bold">Latest TV Shows</h2>
