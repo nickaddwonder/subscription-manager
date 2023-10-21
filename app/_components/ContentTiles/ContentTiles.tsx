@@ -14,7 +14,7 @@ import date from '@functions/date';
 import addContentToContentListsDocument from '@/_functions/addContentToContentListsDocument/addContentToContentListsDocument';
 import FirestoreTvShow from '@/_types/FirestoreTvShow';
 import FirestoreMovie from '@/_types/FirestoreMovie';
-import removeContentFromContentListsDocument from '@functions/removeContentFromContentListsDocument/removeContentFromContentListsDocument';
+import removeContentFromContentListsDocument from '@/_functions/removeContentFromContentListsDocument/tempName';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { database } from '@/firebase';
 
