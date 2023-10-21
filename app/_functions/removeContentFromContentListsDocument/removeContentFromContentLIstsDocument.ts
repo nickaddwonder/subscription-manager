@@ -14,7 +14,7 @@ const removeContentFromContentListsDocument = async ({
     const docRef = await doc(database, `content_lists`, `${contentListId}`);
     updateDoc(docRef, { content: arrayRemove(contentId) });
   } catch (error) {
-    console.error('Failed to remov content from content list:', error);
+    console.error('Failed to remove content from content list:', error);
   }
 };
 
