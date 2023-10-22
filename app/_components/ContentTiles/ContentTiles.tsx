@@ -89,7 +89,7 @@ const ContentTiles: FC<Props> = ({ content, contentType }) => {
               }}
               buttons={[
                 {
-                  buttonType: 'primary',
+                  buttonType: isInContentList(c) ? 'tertiary' : 'primary',
                   children: isInContentList(c)
                     ? 'in watchlist'
                     : 'add to watchlist',
