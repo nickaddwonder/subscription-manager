@@ -8,12 +8,21 @@ const SearchBar: FC = () => {
   const [query, setQuery] = useState('');
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
-    console.log(query);
+    search(e.target.value);
   };
 
-  //   const search = (value:string) => {
-
-  //   };
+  const search = async (value: string) => {
+    try {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
+          value
+        )}&api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
+      );
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <form className="flex gap-2">
       <input
