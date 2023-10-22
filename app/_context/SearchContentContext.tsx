@@ -19,7 +19,7 @@ export const SearchContentProvider: FC<Props> = ({ children }) => {
     []
   );
 
-  const value = [searchContent, setSearchContent];
+  const value = { searchContent, setSearchContent };
 
   return (
     <SearchContentContext.Provider value={value}>

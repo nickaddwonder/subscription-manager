@@ -3,8 +3,10 @@
 import { FC, useState } from 'react';
 import { ChangeEvent } from 'react';
 import axios from 'axios';
+import { useSearchContext } from '@context/SearchContentContext';
 
 const SearchBar: FC = () => {
+  const { setSearchContent } = useSearchContext();
   const [query, setQuery] = useState('');
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
@@ -18,7 +20,9 @@ const SearchBar: FC = () => {
           value
         )}&api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
       );
-      console.log(response);
+      if (response.status === 200) {
+        setSearchContent(response.data.results);
+      }
     } catch (error) {
       console.error(error);
     }

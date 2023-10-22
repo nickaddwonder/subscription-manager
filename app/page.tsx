@@ -49,12 +49,6 @@ const Home = async () => {
           search={true}
         />
         <SearchResults />
-        {/* <div className="w-full container text-center mx-auto p-3 pt-8">
-        <h2 className="text-white text-2xl font-bold">Latest Movies</h2>
-      </div>
-      <div className="w-full container text-center mx-auto p-3 pt-8">
-        <ContentTiles contentType="Movie" content={movies.results} />
-      </div> */}
       </SearchContentProvider>
     </main>
   );
