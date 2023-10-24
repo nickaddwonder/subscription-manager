@@ -16,7 +16,7 @@ const SearchBar: FC = () => {
   const search = async (value: string) => {
     try {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
+        `https://api.themoviedb.org/3/search/multi?query=${encodeURIComponent(
           value
         )}&api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
       );
