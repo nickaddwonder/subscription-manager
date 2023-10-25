@@ -12,6 +12,7 @@ type TvShow = {
   original_language: string;
   vote_count: number;
   first_air_date: Date;
+  adult: boolean;
 };
 
 export default TvShow;
