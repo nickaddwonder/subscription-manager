@@ -1,7 +1,6 @@
-import Movie from '@/_types/tmdb/Movie';
-import TvShow from '@/_types/tmdb/TvShow';
+import Multi from '@customTypes/tmdb/Multi';
 
-const date = (content: Movie | TvShow): Date => {
+const date = (content: Multi): Date => {
   if ('release_date' in content) {
     return new Date(content.release_date);
   } else if ('first_air_date' in content) {

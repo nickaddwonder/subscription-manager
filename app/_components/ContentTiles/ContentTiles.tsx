@@ -9,25 +9,22 @@ import { useUserContent } from '@context/UserContentContext';
 import authenticateUser from '@functions/authenticateUser';
 import addContentToContentsDocument from '@/_functions/addContentToContentsDocument/addContentToContentsDocument';
 import Tile from '@components/Tile/Tile';
-import ContentType from '@customTypes/ContentType';
 import date from '@functions/date';
 import addContentToContentListsDocument from '@/_functions/addContentToContentListsDocument/addContentToContentListsDocument';
-import FirestoreTvShow from '@/_types/FirestoreTvShow';
-import FirestoreMovie from '@/_types/FirestoreMovie';
 import removeContentFromContentListsDocument from '@/_functions/removeContentFromContentListsDocument/removeContentFromContentListsDocument';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { database } from '@/firebase';
-import Multi from '@customTypes/tmdb/Multi';
+import Multi, { MediaType } from '@customTypes/tmdb/Multi';
+import FirestoreMulti from '@customTypes/FirestoreMulti';
 
 type Props = {
   content: Multi[];
-  contentType?: ContentType;
 };
 
-const ContentTiles: FC<Props> = ({ content, contentType }) => {
+const ContentTiles: FC<Props> = ({ content }) => {
   const { token, contentList, setContentList, contentListId } =
     useUserContent();
-  const handleClick = async (c: TvShow | Movie) => {
+  const handleClick = async (c: Multi) => {
     if (await authenticateUser(token)) {
       const doc = await addContentToContentsDocument(c);
       if (doc.success && doc.docRef) {
@@ -35,7 +32,7 @@ const ContentTiles: FC<Props> = ({ content, contentType }) => {
           contentListId,
           contentId: doc.docRef.id,
         });
-        setContentList((list: (FirestoreTvShow | FirestoreMovie)[]) => [
+        setContentList((list: FirestoreMulti[]) => [
           ...list,
           { ...c, fid: doc.docRef?.id },
         ]);
@@ -43,7 +40,7 @@ const ContentTiles: FC<Props> = ({ content, contentType }) => {
     }
   };
 
-  const handleRemove = async (c: TvShow | Movie) => {
+  const handleRemove = async (c: Multi) => {
     if (await authenticateUser(token)) {
       const contentQuery = query(
         collection(database, 'contents'),
@@ -55,15 +52,15 @@ const ContentTiles: FC<Props> = ({ content, contentType }) => {
         contentListId,
         contentId,
       });
-      setContentList((list: (FirestoreTvShow | FirestoreMovie)[]) =>
+      setContentList((list: FirestoreMulti[]) =>
         list.filter((l) => l.fid !== contentId)
       );
     }
   };
 
-  const isInContentList = (c: TvShow | Movie) => {
+  const isInContentList = (c: Multi) => {
     const matchingContent = contentList.filter(
-      (content: FirestoreTvShow | FirestoreMovie) => content.id === c.id
+      (content: FirestoreMulti) => content.id === c.id
     );
 
     return !(matchingContent.length === 0);
@@ -79,7 +76,10 @@ const ContentTiles: FC<Props> = ({ content, contentType }) => {
           >
             <Tile
               title={title(c)}
-              contentType={contentType ?? 'Movie'}
+              contentType={
+                (c.media_type === 'tv' || 'movie') &&
+                (c.media_type as MediaType)
+              }
               date={date(c)}
               description={c.overview}
               image={{
