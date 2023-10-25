@@ -17,9 +17,10 @@ import FirestoreMovie from '@/_types/FirestoreMovie';
 import removeContentFromContentListsDocument from '@/_functions/removeContentFromContentListsDocument/removeContentFromContentListsDocument';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { database } from '@/firebase';
+import Multi from '@customTypes/tmdb/Multi';
 
 type Props = {
-  content: TvShow[] | Movie[];
+  content: Multi[];
   contentType?: ContentType;
 };
 
