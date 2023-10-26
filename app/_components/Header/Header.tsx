@@ -13,7 +13,7 @@ const Header: FC<Props> = ({ title = 'Title', subtitle, search = false }) => {
   return (
     <header className="site-header w-full bg-[#f2f4f7] text-black">
       <div className="w-full flex justify-between items-start md:items-center p-2">
-        <div className="left-column w-5/6 flex flex-col justify-center items-start md:flex-row md:items-center">
+        <div className="left-column w-5/6 md:w-auto md:grow flex flex-col justify-center items-start md:flex-row md:items-center">
           <div className="titles w-full flex flex-col justify-center items-start">
             <span className="text-4xl text-[#272b33]">{title}</span>
             {subtitle && (
@@ -25,7 +25,7 @@ const Header: FC<Props> = ({ title = 'Title', subtitle, search = false }) => {
             <NavigationLink href={'/watchlist'}>Watchlist</NavigationLink>
           </div>
         </div>
-        <div className="right-column w-1/6 h-full flex justify-end items-start">
+        <div className="right-column md:w-auto md:shrink-0 md:p-3 w-1/6 h-full flex justify-end items-start">
           <UserButton afterSignOutUrl="/" />
         </div>
       </div>

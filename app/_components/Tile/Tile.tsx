@@ -27,7 +27,7 @@ const Tile: FC<Props> = ({
   const [src, setSrc] = useState(image.src);
   return (
     <div className="tile flex flex-col text-left w-full md:flex-row md:h-full">
-      <div className="bg-red-800 flex-shrink-0 md:w-1/2">
+      <div className="bg-red-800 flex-shrink-0 md:w-1/2 lg:w-1/3">
         <Image
           className="z-1 min-w-full min-h-full object-cover"
           src={src}
