@@ -12,7 +12,7 @@ import addContentToContentListsDocument from '@/_functions/addContentToContentLi
 import removeContentFromContentListsDocument from '@/_functions/removeContentFromContentListsDocument/removeContentFromContentListsDocument';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { database } from '@/firebase';
-import Multi, { MediaType } from '@customTypes/tmdb/Multi';
+import Multi from '@customTypes/tmdb/Multi';
 import FirestoreMulti from '@customTypes/FirestoreMulti';
 
 type Props = {
@@ -65,13 +65,13 @@ const ContentTiles: FC<Props> = ({ content }) => {
   };
 
   return (
-    <div className="flex w-full flex-wrap -md:mx-3">
+    <div className="flex w-auto flex-wrap md:-mx-3">
       {content.length > 0 ? (
         content
           .filter((c) => c.media_type === 'movie' || c.media_type === 'tv')
           .map((c) => (
             <div
-              className="relative w-full md:w-1/2 mb-3 md:mb-6 md:px-3"
+              className="relative w-full lg:w-1/2 mb-3 md:mb-6 md:px-3"
               key={uuid()}
             >
               <Tile
@@ -99,7 +99,7 @@ const ContentTiles: FC<Props> = ({ content }) => {
             </div>
           ))
       ) : (
-        <div className="w-full">Nothing here</div>
+        <div className="w-full p-10">Search something</div>
       )}
     </div>
   );

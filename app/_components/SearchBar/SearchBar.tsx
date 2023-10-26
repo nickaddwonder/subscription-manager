@@ -21,7 +21,6 @@ const SearchBar: FC = () => {
         )}&api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
       );
       if (response.status === 200) {
-        console.log(response.data.results);
         setSearchContent(response.data.results);
       }
     } catch (error) {
@@ -37,12 +36,12 @@ const SearchBar: FC = () => {
         value={query}
         onChange={handleSearch}
       />
-      <button
+      {/* <button
         className="text-white bg-[#145dfa] rounded-lg py-2.5 px-5 shrink-0"
         type="button"
       >
         Search
-      </button>
+      </button> */}
     </form>
   );
 };

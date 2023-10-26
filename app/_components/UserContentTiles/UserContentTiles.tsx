@@ -54,7 +54,7 @@ const UserContentTiles: FC = () => {
           </div>
         ))
       ) : (
-        <div className="text-white text-center w-full">list is empty</div>
+        <div className="text-white text-center p-10 w-full">list is empty</div>
       )}
     </div>
   );
