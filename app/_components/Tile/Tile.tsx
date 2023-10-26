@@ -5,10 +5,11 @@ import { FC, ComponentProps, useState } from 'react';
 import Pill from '@components/Pill/Pill';
 import Button from '@components/Button/Button';
 import { v4 as uuid } from 'uuid';
+import { MediaType } from '@customTypes/tmdb/Multi';
 
 type Props = {
   title: string;
-  contentType: 'Movie' | 'TV';
+  contentType: MediaType;
   date: Date;
   description: string;
   image: ComponentProps<typeof Image>;

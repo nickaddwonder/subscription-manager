@@ -21,6 +21,7 @@ const SearchBar: FC = () => {
         )}&api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
       );
       if (response.status === 200) {
+        console.log(response.data.results);
         setSearchContent(response.data.results);
       }
     } catch (error) {

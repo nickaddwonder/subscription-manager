@@ -9,22 +9,19 @@ import title from '@/_functions/title';
 import date from '@/_functions/date';
 import { v4 as uuid } from 'uuid';
 import removeContentFromContentListsDocument from '@/_functions/removeContentFromContentListsDocument/removeContentFromContentListsDocument';
-import FirestoreMovie from '@/_types/FirestoreMovie';
-import FirestoreTvShow from '@/_types/FirestoreTvShow';
+import FirestoreMulti from '@/_types/FirestoreMulti';
 
 const UserContentTiles: FC = () => {
   const { token, contentList, setContentList, contentListId } =
     useUserContent();
 
-  const handleClick = async (
-    c: (TvShow & { fid: string }) | (Movie & { fid: string })
-  ) => {
+  const handleClick = async (c: FirestoreMulti) => {
     if (await authenticateUser(token)) {
       removeContentFromContentListsDocument({
         contentId: c.fid,
         contentListId,
       });
-      setContentList((list: (FirestoreMovie | FirestoreTvShow)[]) =>
+      setContentList((list: FirestoreMulti[]) =>
         list.filter((l) => l.fid !== c.fid)
       );
     }
@@ -33,11 +30,11 @@ const UserContentTiles: FC = () => {
   return (
     <div className="flex w-full flex-wrap -md:mx-3">
       {contentList.length > 0 ? (
-        contentList.toReversed().map((c: FirestoreMovie | FirestoreTvShow) => (
+        contentList.toReversed().map((c: FirestoreMulti) => (
           <div className="relative w-full p-3 mb-3 md:mb-0" key={uuid()}>
             <Tile
               title={title(c)}
-              contentType={'Movie'}
+              contentType={c.media_type}
               date={date(c)}
               description={c.overview}
               image={{
