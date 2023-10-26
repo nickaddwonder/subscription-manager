@@ -9,7 +9,7 @@ import { MediaType } from '@customTypes/tmdb/Multi';
 
 type Props = {
   title: string;
-  contentType: Exclude<MediaType, 'person'>;
+  contentType: MediaType;
   date: Date;
   description: string;
   image: ComponentProps<typeof Image>;

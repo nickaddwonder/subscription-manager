@@ -1,8 +1,6 @@
 'use client';
 
 import { FC } from 'react';
-import TvShow from '@/_types/tmdb/TvShow';
-import Movie from '@/_types/tmdb/Movie';
 import { v4 as uuid } from 'uuid';
 import title from '@functions/title';
 import { useUserContent } from '@context/UserContentContext';
@@ -69,38 +67,37 @@ const ContentTiles: FC<Props> = ({ content }) => {
   return (
     <div className="flex w-full flex-wrap -md:mx-3">
       {content.length > 0 ? (
-        content.map((c) => (
-          <div
-            className="relative w-full md:w-1/2 mb-3 md:mb-6 md:px-3"
-            key={uuid()}
-          >
-            <Tile
-              title={title(c)}
-              contentType={
-                (c.media_type === 'tv' || 'movie') &&
-                (c.media_type as MediaType)
-              }
-              date={date(c)}
-              description={c.overview}
-              image={{
-                src: `${process.env.NEXT_PUBLIC_TMDB_IMAGE_URL_BASE}/w500${c.poster_path}`,
-                alt: `${title(c)}`,
-                width: 500,
-                height: 500,
-              }}
-              buttons={[
-                {
-                  buttonType: isInContentList(c) ? 'tertiary' : 'primary',
-                  children: isInContentList(c)
-                    ? 'in watchlist'
-                    : 'add to watchlist',
-                  onClick: () =>
-                    isInContentList(c) ? handleRemove(c) : handleClick(c),
-                },
-              ]}
-            />
-          </div>
-        ))
+        content
+          .filter((c) => c.media_type === 'movie' || c.media_type === 'tv')
+          .map((c) => (
+            <div
+              className="relative w-full md:w-1/2 mb-3 md:mb-6 md:px-3"
+              key={uuid()}
+            >
+              <Tile
+                title={title(c)}
+                contentType={c.media_type}
+                date={date(c)}
+                description={c.overview}
+                image={{
+                  src: `${process.env.NEXT_PUBLIC_TMDB_IMAGE_URL_BASE}/w500${c.poster_path}`,
+                  alt: `${title(c)}`,
+                  width: 500,
+                  height: 500,
+                }}
+                buttons={[
+                  {
+                    buttonType: isInContentList(c) ? 'tertiary' : 'primary',
+                    children: isInContentList(c)
+                      ? 'in watchlist'
+                      : 'add to watchlist',
+                    onClick: () =>
+                      isInContentList(c) ? handleRemove(c) : handleClick(c),
+                  },
+                ]}
+              />
+            </div>
+          ))
       ) : (
         <div className="w-full">Nothing here</div>
       )}
