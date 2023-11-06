@@ -2,6 +2,7 @@ import './globals.css';
 import { Inter } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import { UserContentProvider } from './_context/UserContentContext';
+import ReactQueryProvider from './_context/ReactQueryContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,12 +17,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <UserContentProvider>
-        <html lang="en">
-          <body className={inter.className}>{children}</body>
-        </html>
-      </UserContentProvider>
-    </ClerkProvider>
+    <ReactQueryProvider>
+      <ClerkProvider>
+        <UserContentProvider>
+          <html lang="en">
+            <body className={inter.className}>{children}</body>
+          </html>
+        </UserContentProvider>
+      </ClerkProvider>
+    </ReactQueryProvider>
   );
 }
