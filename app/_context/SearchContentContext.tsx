@@ -1,7 +1,7 @@
 'use client';
 
-import Movie from '@/_types/tmdb/Movie';
-import TvShow from '@/_types/tmdb/TvShow';
+import Movie from '@customTypes/tmdb/Movie';
+import TvShow from '@customTypes/tmdb/TvShow';
 import { FC, createContext, useContext, ReactNode, useState } from 'react';
 
 const SearchContentContext = createContext<any | null>(null);

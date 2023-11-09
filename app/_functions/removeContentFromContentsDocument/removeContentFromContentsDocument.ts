@@ -1,7 +1,7 @@
 import { deleteDoc, doc } from 'firebase/firestore';
 import { database } from '@/firebase';
-import Movie from '@/_types/tmdb/Movie';
-import TvShow from '@/_types/tmdb/TvShow';
+import Movie from '@customTypes/tmdb/Movie';
+import TvShow from '@customTypes/tmdb/TvShow';
 
 const removeContentFromContentsDocument = async (
   content: (TvShow & { fid: string }) | (Movie & { fid: string })
