@@ -1,8 +1,8 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
-import { UserContentProvider } from './_context/UserContentContext';
-import ReactQueryProvider from './_context/ReactQueryContext';
+import { UserContentProvider } from '@context/UserContentContext';
+import ReactQueryProvider from '@context/ReactQueryContext';
 
 const inter = Inter({ subsets: ['latin'] });
 

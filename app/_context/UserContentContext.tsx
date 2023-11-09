@@ -9,9 +9,9 @@ import {
   ReactNode,
 } from 'react';
 import { useAuth, useUser } from '@clerk/nextjs';
-import loadContentList from '@/_functions/loadContentList/loadContentList';
-import FirestoreMovie from '@/_types/FirestoreMovie';
-import FirestoreTvShow from '@/_types/FirestoreTvShow';
+import loadContentList from '@functions/loadContentList/loadContentList';
+import FirestoreMovie from '@customTypes/FirestoreMovie';
+import FirestoreTvShow from '@customTypes/FirestoreTvShow';
 
 type Props = {
   children: ReactNode;

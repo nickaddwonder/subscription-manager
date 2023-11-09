@@ -1,6 +1,6 @@
 import Header from '@components/Header/Header';
-import { SearchContentProvider } from './_context/SearchContentContext';
-import SearchResults from './_components/SearchResults/SearchResults';
+import { SearchContentProvider } from '@context/SearchContentContext';
+import SearchResults from '@components/SearchResults/SearchResults';
 
 // async function getLatestTvShows() {
 //   const res = await fetch(

@@ -1,15 +1,13 @@
 'use client';
 import { FC } from 'react';
 import { useUserContent } from '@context/UserContentContext';
-import TvShow from '@/_types/tmdb/TvShow';
-import Movie from '@/_types/tmdb/Movie';
-import authenticateUser from '@/_functions/authenticateUser';
+import authenticateUser from '@functions/authenticateUser';
 import Tile from '../Tile/Tile';
-import title from '@/_functions/title';
-import date from '@/_functions/date';
+import title from '@functions/title';
+import date from '@functions/date';
 import { v4 as uuid } from 'uuid';
-import removeContentFromContentListsDocument from '@/_functions/removeContentFromContentListsDocument/removeContentFromContentListsDocument';
-import FirestoreMulti from '@/_types/FirestoreMulti';
+import removeContentFromContentListsDocument from '@functions/removeContentFromContentListsDocument/removeContentFromContentListsDocument';
+import FirestoreMulti from '@customTypes/FirestoreMulti';
 
 const UserContentTiles: FC = () => {
   const { token, contentList, setContentList, contentListId } =

@@ -1,5 +1,5 @@
-import Header from '@/_components/Header/Header';
-import UserContentTiles from '@/_components/UserContentTiles/UserContentTiles';
+import Header from '@components/Header/Header';
+import UserContentTiles from '@components/UserContentTiles/UserContentTiles';
 
 const Watchlist = async () => {
   return (

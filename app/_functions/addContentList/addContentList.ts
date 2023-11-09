@@ -1,5 +1,5 @@
-import ContentList from '@/_types/ContentList';
-import FirestoreReturn from '@/_types/FirestoreReturn';
+import ContentList from '@customTypes/ContentList';
+import FirestoreReturn from '@customTypes/FirestoreReturn';
 import { database } from '@/firebase';
 import { addDoc, collection } from 'firebase/firestore';
 
