@@ -5,7 +5,7 @@ const Watchlist = async () => {
   return (
     <>
       <main>
-        <Header title={'Your Watchlist'} subtitle={'Start Watching.'} />
+        <Header />
         <UserContentTiles />
       </main>
     </>
