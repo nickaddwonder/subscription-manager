@@ -9,41 +9,55 @@ import { useMediaQuery, useIsomorphicLayoutEffect } from 'usehooks-ts';
 
 const MainMenu: FC = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const isTablet = useMediaQuery(`(min-width: 641px)`);
+  const [mobileMenuDisabled, setMobileMenuDisabled] = useState<boolean>(false);
+  const isLg = useMediaQuery(`(min-width: 769px)`);
 
   const handleResize = () => {
-    if (isTablet) {
-      console.log('does this ever fire?');
+    if (isLg) {
       setOpen(false);
     }
   };
   const handleClick = () => {
-    if (!isTablet) {
+    if (!isLg) {
       setOpen(!open);
+    }
+  };
+
+  const isMobileMenuDisabled = () => {
+    if (isLg) {
+      setMobileMenuDisabled(true);
+    } else {
+      setMobileMenuDisabled(false);
     }
   };
 
   useIsomorphicLayoutEffect(() => {
     handleResize();
+    isMobileMenuDisabled();
   });
   return (
-    <div className="main-menu text-black flex justify-center items-center relative">
-      <button onClick={handleClick}>
+    <div className="main-menu relative flex items-center justify-center text-black">
+      <button
+        className="md:hidden"
+        disabled={mobileMenuDisabled}
+        onClick={handleClick}
+      >
         <HamburgerMenu />
       </button>
       <div
         className={cx(
-          'main-menu-navigation absolute bg-white top-full right-0 rounded px-3 drop-shadow-[4px_4px_4px_rgba(0,0,0,0.10)]',
-          { block: open },
-          { hidden: !open }
+          'main-menu-navigation absolute right-0 top-full rounded bg-white px-3 drop-shadow-[4px_4px_4px_rgba(0,0,0,0.10)] md:relative md:right-auto md:top-auto md:rounded-none md:drop-shadow-none',
+          { block: open && !isLg },
+          { hidden: !open && !isLg },
+          { block: isLg }
         )}
       >
         <nav>
-          <ul>
-            <li className="my-3">
+          <ul className="md:flex md:items-center md:justify-center">
+            <li className="my-3 md:mx-3 md:my-0">
               <Link href={'/'}>Dashboard</Link>
             </li>
-            <li className="my-3">
+            <li className="my-3 md:mx-3 md:my-0">
               <Link href={'/watchlist'}>Watch List</Link>
             </li>
           </ul>

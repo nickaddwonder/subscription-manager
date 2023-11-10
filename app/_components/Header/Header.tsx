@@ -4,14 +4,14 @@ import MainMenu from './MainMenu/MainMenu';
 
 const Header: FC = () => {
   return (
-    <header className="site-header w-full bg-white h-[60px]">
-      <div className="container px-3 h-full mx-auto">
-        <div className="w-auto h-full -mx-3 flex justify-between items-center">
-          <div className="left-column h-full w-5/6 flex px-3 justify-between items-center">
+    <header className="site-header h-[60px] w-full bg-white">
+      <div className="container mx-auto h-full px-3">
+        <div className="-mx-3 flex h-full w-auto items-center justify-between">
+          <div className="left-column flex h-full w-auto grow items-center justify-between px-3">
             <span className="text-xl text-stone-950">Subscription Manager</span>
             <MainMenu />
           </div>
-          <div className="right-column px-3 w-1/6 h-full flex justify-end items-center">
+          <div className="right-column flex h-full w-auto shrink-0 items-center justify-end px-3">
             <UserButton afterSignOutUrl="/" />
           </div>
         </div>
