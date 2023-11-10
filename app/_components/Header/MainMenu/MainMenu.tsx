@@ -5,12 +5,27 @@ import HamburgerMenu from '@components/icons/HamburgerMenu/HamburgerMenu';
 import cx from 'classnames';
 import { useState } from 'react';
 import Link from '@components/Link/Link';
+import { useMediaQuery, useIsomorphicLayoutEffect } from 'usehooks-ts';
 
 const MainMenu: FC = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const handleClick = () => {
-    setOpen(!open);
+  const isTablet = useMediaQuery(`(min-width: 641px)`);
+
+  const handleResize = () => {
+    if (isTablet) {
+      console.log('does this ever fire?');
+      setOpen(false);
+    }
   };
+  const handleClick = () => {
+    if (!isTablet) {
+      setOpen(!open);
+    }
+  };
+
+  useIsomorphicLayoutEffect(() => {
+    handleResize();
+  });
   return (
     <div className="main-menu text-black flex justify-center items-center relative">
       <button onClick={handleClick}>
