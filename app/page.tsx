@@ -43,11 +43,7 @@ const Home = async () => {
   return (
     <main>
       <SearchContentProvider>
-        <Header
-          title={'Search Content'}
-          subtitle={'What are you looking to watch?'}
-          search={true}
-        />
+        <Header />
         <SearchResults />
       </SearchContentProvider>
     </main>
