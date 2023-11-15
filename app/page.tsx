@@ -1,6 +1,7 @@
 import Header from '@components/Header/Header';
 import { SearchContentProvider } from '@context/SearchContentContext';
 import SearchResults from '@components/SearchResults/SearchResults';
+import SearchBar from '@components/SearchBar/SearchBar';
 
 // async function getLatestTvShows() {
 //   const res = await fetch(
@@ -43,7 +44,9 @@ const Home = async () => {
   return (
     <main>
       <SearchContentProvider>
-        <Header />
+        <div className="container mx-auto px-3 py-6">
+          <SearchBar />
+        </div>
         <SearchResults />
       </SearchContentProvider>
     </main>

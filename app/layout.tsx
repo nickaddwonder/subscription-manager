@@ -1,8 +1,9 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
-import { ClerkProvider } from '@clerk/nextjs';
+import { ClerkProvider, SignedIn } from '@clerk/nextjs';
 import { UserContentProvider } from '@context/UserContentContext';
 import ReactQueryProvider from '@context/ReactQueryContext';
+import Header from '@components/Header/Header';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,7 +22,12 @@ export default function RootLayout({
       <ClerkProvider>
         <UserContentProvider>
           <html lang="en">
-            <body className={inter.className}>{children}</body>
+            <body className={inter.className}>
+              <SignedIn>
+                <Header />
+              </SignedIn>
+              {children}
+            </body>
           </html>
         </UserContentProvider>
       </ClerkProvider>
