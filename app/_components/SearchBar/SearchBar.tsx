@@ -4,6 +4,7 @@ import { FC, useState } from 'react';
 import { ChangeEvent } from 'react';
 import axios from 'axios';
 import { useSearchContext } from '@context/SearchContentContext';
+import MagnifyingGlass from '../icons/MagnifyingGlass/MagnifyingGlass';
 
 const SearchBar: FC = () => {
   const { setSearchContent } = useSearchContext();
@@ -28,10 +29,13 @@ const SearchBar: FC = () => {
     }
   };
   return (
-    <form className="flex gap-2">
+    <form className="relative flex gap-2">
+      <div className="pointer-events-none absolute left-[16px] top-1/2 -translate-y-1/2">
+        <MagnifyingGlass />
+      </div>
       <input
         type="search"
-        className="text-base h-auto min-h-[2.75rem] text-[#101828] bg-white rounded-lg px-3.5 py-2 border border-[#d0d5dd] border-solid grow"
+        className="h-20 min-h-[2.75rem] grow rounded-2xl border border-solid border-[#d0d5dd] bg-white py-6 pl-[calc(16px+16px+24px)] pr-4 text-2xl text-base text-[#101828]"
         placeholder="Search something"
         value={query}
         onChange={handleSearch}
