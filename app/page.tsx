@@ -44,10 +44,8 @@ const Home = async () => {
   return (
     <main>
       <SearchContentProvider>
-        <Header />
         <div className="container mx-auto px-3 py-6">
           <SearchBar />
-          Search Bar here
         </div>
         <SearchResults />
       </SearchContentProvider>

@@ -3,12 +3,9 @@ import UserContentTiles from '@components/UserContentTiles/UserContentTiles';
 
 const Watchlist = async () => {
   return (
-    <>
-      <main>
-        <Header />
-        <UserContentTiles />
-      </main>
-    </>
+    <main>
+      <UserContentTiles />
+    </main>
   );
 };
 

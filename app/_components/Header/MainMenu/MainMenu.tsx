@@ -2,7 +2,6 @@
 
 import { FC } from 'react';
 import HamburgerMenu from '@components/icons/HamburgerMenu/HamburgerMenu';
-import cx from 'classnames';
 import { useState } from 'react';
 import Link from '@components/Link/Link';
 import { useMediaQuery, useIsomorphicLayoutEffect } from 'usehooks-ts';
@@ -45,12 +44,11 @@ const MainMenu: FC = () => {
         <HamburgerMenu />
       </button>
       <div
-        className={cx(
-          'main-menu-navigation absolute right-0 top-full rounded bg-white px-3 drop-shadow-[4px_4px_4px_rgba(0,0,0,0.10)] md:relative md:right-auto md:top-auto md:rounded-none md:drop-shadow-none',
-          { block: open && !isLg },
-          { hidden: !open && !isLg },
-          { block: isLg }
-        )}
+        className={`main-menu-navigation absolute right-0 top-full rounded bg-white px-3 drop-shadow-[4px_4px_4px_rgba(0,0,0,0.10)] md:relative md:right-auto md:top-auto md:rounded-none md:drop-shadow-none
+          ${open && !isLg && 'block'},
+          ${!open && !isLg && 'hidden'},
+          ${isLg && 'block'}`}
+        suppressHydrationWarning
       >
         <nav>
           <ul className="md:flex md:items-center md:justify-center">
