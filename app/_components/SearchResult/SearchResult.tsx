@@ -4,19 +4,29 @@ import Image from 'next/image';
 import { ComponentProps, FC, useState } from 'react';
 import { MediaType } from '@customTypes/tmdb/Multi';
 import Add from '@components/icons/Add/Add';
+import Close from '@components/icons/Close/Close';
 
 type Props = {
   title?: string;
   contentType?: MediaType;
   date?: Date;
   image: ComponentProps<typeof Image>;
+  mode: 'add' | 'remove';
+  onClick: () => void;
 };
 
 const AddButton: FC<ComponentProps<'button'>> = ({ children }) => {
   return <button className="rounded bg-green-500">{children}</button>;
 };
 
-const SearchResult: FC<Props> = ({ title, contentType, date, image }) => {
+const SearchResult: FC<Props> = ({
+  title,
+  contentType,
+  date,
+  image,
+  mode = 'add',
+  onClick,
+}) => {
   const [src, setSrc] = useState(image.src);
   return (
     <div className="flex gap-3 bg-white p-4 text-white">
@@ -30,7 +40,7 @@ const SearchResult: FC<Props> = ({ title, contentType, date, image }) => {
           priority={true}
         />
       </div>
-      <div className="grow">
+      <div className="grow text-left">
         {title ? (
           <h2 className="w-full text-sm font-medium text-stone-950">{title}</h2>
         ) : null}
@@ -47,8 +57,9 @@ const SearchResult: FC<Props> = ({ title, contentType, date, image }) => {
         ) : null}
       </div>
       <div className="flex shrink-0 items-center text-stone-950">
-        <AddButton>
-          <Add />
+        <AddButton onClick={onClick}>
+          {mode === 'add' && <Add />}
+          {mode === 'remove' && <Close />}
         </AddButton>
       </div>
     </div>
