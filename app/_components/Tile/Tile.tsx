@@ -6,11 +6,12 @@ import Pill from '@components/Pill/Pill';
 import Button from '@components/Button/Button';
 import { v4 as uuid } from 'uuid';
 import { MediaType } from '@customTypes/tmdb/Multi';
+import { TMDBDate } from '@functions/date';
 
 type Props = {
   title: string;
   contentType: MediaType;
-  date: Date;
+  date: TMDBDate;
   description: string;
   image: ComponentProps<typeof Image>;
   buttons?: ComponentProps<typeof Button>[];
@@ -26,10 +27,10 @@ const Tile: FC<Props> = ({
 }) => {
   const [src, setSrc] = useState(image.src);
   return (
-    <div className="tile flex flex-col text-left w-full md:flex-row md:h-full">
-      <div className="bg-red-800 flex-shrink-0 md:w-1/2 lg:w-1/3">
+    <div className="tile flex w-full flex-col text-left md:h-full md:flex-row">
+      <div className="flex-shrink-0 bg-red-800 md:w-1/2 lg:w-1/3">
         <Image
-          className="z-1 min-w-full min-h-full object-cover"
+          className="z-1 min-h-full min-w-full object-cover"
           src={src}
           alt={image.alt}
           width={image.width}
@@ -37,25 +38,25 @@ const Tile: FC<Props> = ({
           onError={() => setSrc('/public/images/default_poster.jpg')}
         />
       </div>
-      <div className="bg-[#667085] p-4 md:flex md:flex-col md:flex-grow">
-        <div className="flex justify-between items-start">
-          <h2 className="text-white mb-1 text-xl font-bold leading-tight">
+      <div className="bg-[#667085] p-4 md:flex md:flex-grow md:flex-col">
+        <div className="flex items-start justify-between">
+          <h2 className="mb-1 text-xl font-bold leading-tight text-white">
             {title}
           </h2>
           <Pill>{contentType}</Pill>
         </div>
         <div className="mb-2">
-          <span className="text-white text-sm">
+          <span className="text-sm text-white">
             {date.toString() !== 'Invalid Date'
-              ? date.toISOString().slice(0, 10)
+              ? (date as Date).toISOString().slice(0, 10)
               : 'NA'}
           </span>
         </div>
         <div className="mb-2">
-          <p className="text-base line-clamp-4">{description}</p>
+          <p className="line-clamp-4 text-base">{description}</p>
         </div>
         {buttons && buttons.length > 0 && (
-          <div className="flex justify-end items-center [&.justify-end_button]:mr-0 [&.justify-start_button]:ml-0 md:mt-auto">
+          <div className="flex items-center justify-end md:mt-auto [&.justify-end_button]:mr-0 [&.justify-start_button]:ml-0">
             {buttons.map((b) => (
               <Button
                 key={uuid()}

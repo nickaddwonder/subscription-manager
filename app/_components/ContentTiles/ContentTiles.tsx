@@ -6,7 +6,6 @@ import title from '@functions/title';
 import { useUserContent } from '@context/UserContentContext';
 import authenticateUser from '@functions/authenticateUser';
 import addContentToContentsDocument from '@functions/addContentToContentsDocument/addContentToContentsDocument';
-import Tile from '@components/Tile/Tile';
 import date from '@functions/date';
 import addContentToContentListsDocument from '@functions/addContentToContentListsDocument/addContentToContentListsDocument';
 import removeContentFromContentListsDocument from '@functions/removeContentFromContentListsDocument/removeContentFromContentListsDocument';
@@ -14,6 +13,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import { database } from '@/firebase';
 import Multi from '@customTypes/tmdb/Multi';
 import FirestoreMulti from '@customTypes/FirestoreMulti';
+import SearchResult from '@components/SearchResult/SearchResult';
 
 type Props = {
   content: Multi[];
@@ -66,41 +66,33 @@ const ContentTiles: FC<Props> = ({ content }) => {
 
   return (
     <div className="flex w-auto flex-wrap md:-mx-3">
-      {content.length > 0 ? (
-        content
-          .filter((c) => c.media_type === 'movie' || c.media_type === 'tv')
-          .map((c) => (
-            <div
-              className="relative w-full lg:w-1/2 mb-3 md:mb-6 md:px-3"
-              key={uuid()}
-            >
-              <Tile
-                title={title(c)}
-                contentType={c.media_type}
-                date={date(c)}
-                description={c.overview}
-                image={{
-                  src: `${process.env.NEXT_PUBLIC_TMDB_IMAGE_URL_BASE}/w500${c.poster_path}`,
-                  alt: `${title(c)}`,
-                  width: 500,
-                  height: 500,
-                }}
-                buttons={[
-                  {
-                    buttonType: isInContentList(c) ? 'tertiary' : 'primary',
-                    children: isInContentList(c)
-                      ? 'in watchlist'
-                      : 'add to watchlist',
-                    onClick: () =>
-                      isInContentList(c) ? handleRemove(c) : handleClick(c),
-                  },
-                ]}
-              />
-            </div>
-          ))
-      ) : (
-        <div className="w-full p-10">Search something</div>
-      )}
+      <ul className="relative w-full overflow-hidden rounded-b">
+        {content.length > 0 ? (
+          content
+            .filter((c) => c.media_type === 'movie' || c.media_type === 'tv')
+            .map((c) => (
+              <li key={uuid()}>
+                <SearchResult
+                  title={title(c)}
+                  contentType={c.media_type}
+                  date={date(c)}
+                  image={{
+                    src: `${process.env.NEXT_PUBLIC_TMDB_IMAGE_URL_BASE}/w500${c.poster_path}`,
+                    alt: `${title(c)}`,
+                    width: 500,
+                    height: 500,
+                  }}
+                  mode={isInContentList(c) ? 'remove' : 'add'}
+                  handleClick={() => {
+                    isInContentList(c) ? handleRemove(c) : handleClick(c);
+                  }}
+                />
+              </li>
+            ))
+        ) : (
+          <div className="w-full p-10">Search something</div>
+        )}
+      </ul>
     </div>
   );
 };
