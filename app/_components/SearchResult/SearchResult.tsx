@@ -5,11 +5,12 @@ import { ComponentProps, FC, useState } from 'react';
 import { MediaType } from '@customTypes/tmdb/Multi';
 import Add from '@components/icons/Add/Add';
 import Close from '@components/icons/Close/Close';
+import { TMDBDate } from '@functions/date';
 
 type Props = {
   title?: string;
   contentType?: MediaType;
-  date?: Date;
+  date?: TMDBDate;
   image: ComponentProps<typeof Image>;
   mode: 'add' | 'remove';
   handleClick: () => void;
@@ -41,18 +42,20 @@ const SearchResult: FC<Props> = ({
           alt={image.alt}
           width={image.width}
           height={image.height}
-          priority={true}
+          onError={() => setSrc('/images/default_poster.jpg')}
         />
       </div>
       <div className="grow text-left">
         {title ? (
           <h2 className="w-full text-sm font-medium text-stone-950">{title}</h2>
         ) : null}
-        {date ? (
+        {date !== 'N/A' ? (
           <h3 className="inline text-xs font-medium text-stone-500">
-            {date.getFullYear()}
+            {date!.getFullYear()}
           </h3>
-        ) : null}
+        ) : (
+          <h3 className="inline text-xs font-medium text-stone-500">{date}</h3>
+        )}
         <span className="inline text-stone-500"> · </span>
         {contentType ? (
           <h3 className="inline text-xs font-medium text-stone-500">
