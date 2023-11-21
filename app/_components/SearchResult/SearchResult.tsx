@@ -32,17 +32,15 @@ const SearchResult: FC<Props> = ({
   mode = 'add',
   handleClick,
 }) => {
-  const [src, setSrc] = useState(image.src);
   return (
     <div className="flex gap-3 bg-white p-4 text-white">
       <div className="w-11 shrink-0">
         <img
           className="z-1 min-h-full min-w-full object-cover"
-          src={src as string}
+          src={image.src as string}
           alt={image.alt}
           width={image.width}
           height={image.height}
-          onError={() => setSrc('/images/default_poster.jpg')}
         />
       </div>
       <div className="grow text-left">
