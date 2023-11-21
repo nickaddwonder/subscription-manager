@@ -2,6 +2,8 @@ import Header from '@components/Header/Header';
 import { SearchContentProvider } from '@context/SearchContentContext';
 import SearchResults from '@components/SearchResults/SearchResults';
 import SearchBar from '@components/SearchBar/SearchBar';
+import SearchResult from '@components/SearchResult/SearchResult';
+import { MediaType } from '@customTypes/tmdb/Multi';
 
 // async function getLatestTvShows() {
 //   const res = await fetch(
@@ -44,10 +46,9 @@ const Home = async () => {
   return (
     <main>
       <SearchContentProvider>
-        <div className="container mx-auto px-3 py-6">
-          <SearchBar />
+        <div className="container mx-auto">
+          <SearchResults />
         </div>
-        <SearchResults />
       </SearchContentProvider>
     </main>
   );

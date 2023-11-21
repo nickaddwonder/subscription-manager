@@ -12,11 +12,15 @@ type Props = {
   date?: Date;
   image: ComponentProps<typeof Image>;
   mode: 'add' | 'remove';
-  onClick: () => void;
+  handleClick: () => void;
 };
 
-const AddButton: FC<ComponentProps<'button'>> = ({ children }) => {
-  return <button className="rounded bg-green-500">{children}</button>;
+const ActionButton: FC<ComponentProps<'button'>> = ({ children, ...props }) => {
+  return (
+    <button {...props} className="rounded bg-green-500">
+      {children}
+    </button>
+  );
 };
 
 const SearchResult: FC<Props> = ({
@@ -25,7 +29,7 @@ const SearchResult: FC<Props> = ({
   date,
   image,
   mode = 'add',
-  onClick,
+  handleClick,
 }) => {
   const [src, setSrc] = useState(image.src);
   return (
@@ -57,10 +61,10 @@ const SearchResult: FC<Props> = ({
         ) : null}
       </div>
       <div className="flex shrink-0 items-center text-stone-950">
-        <AddButton onClick={onClick}>
+        <ActionButton onClick={handleClick}>
           {mode === 'add' && <Add />}
           {mode === 'remove' && <Close />}
-        </AddButton>
+        </ActionButton>
       </div>
     </div>
   );
