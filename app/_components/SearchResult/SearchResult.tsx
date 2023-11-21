@@ -36,9 +36,9 @@ const SearchResult: FC<Props> = ({
   return (
     <div className="flex gap-3 bg-white p-4 text-white">
       <div className="w-11 shrink-0">
-        <Image
+        <img
           className="z-1 min-h-full min-w-full object-cover"
-          src={src}
+          src={src as string}
           alt={image.alt}
           width={image.width}
           height={image.height}
