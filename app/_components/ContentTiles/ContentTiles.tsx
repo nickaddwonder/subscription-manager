@@ -66,7 +66,7 @@ const ContentTiles: FC<Props> = ({ content }) => {
 
   return (
     <div className="flex w-auto flex-wrap md:-mx-3">
-      <ul className="relative w-full overflow-hidden rounded">
+      <ul className="relative w-full overflow-hidden rounded-b">
         {content.length > 0 ? (
           content
             .filter((c) => c.media_type === 'movie' || c.media_type === 'tv')

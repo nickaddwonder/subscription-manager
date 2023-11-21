@@ -5,9 +5,10 @@ import { ChangeEvent } from 'react';
 import axios from 'axios';
 import { useSearchContext } from '@context/SearchContentContext';
 import MagnifyingGlass from '../icons/MagnifyingGlass/MagnifyingGlass';
+import cx from 'classnames';
 
 const SearchBar: FC = () => {
-  const { setSearchContent } = useSearchContext();
+  const { searchContent, setSearchContent } = useSearchContext();
   const [query, setQuery] = useState('');
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
@@ -36,7 +37,10 @@ const SearchBar: FC = () => {
       <input
         name="search"
         type="search"
-        className="h-20 min-h-[2.75rem] grow rounded-2xl border border-solid border-[#d0d5dd] bg-white py-6 pl-[calc(16px+16px+24px)] pr-4 text-2xl text-base text-[#101828]"
+        className={cx(
+          'h-20 min-h-[2.75rem] grow rounded-2xl border border-solid border-[#d0d5dd] bg-white py-6 pl-[calc(16px+16px+24px)] pr-4 text-2xl text-base text-[#101828]',
+          { 'rounded-b-none': searchContent.length > 0 }
+        )}
         placeholder="Search something"
         value={query}
         onChange={handleSearch}
