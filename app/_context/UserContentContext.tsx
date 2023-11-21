@@ -54,6 +54,10 @@ export const UserContentProvider: FC<Props> = ({ children }) => {
     }
   }, [token]);
 
+  useEffect(() => {
+    console.log(process.env.NEXT_PUBLIC_TMDB_IMAGE_URL_BASE);
+  }, []);
+
   const value = {
     contentList,
     setContentList,

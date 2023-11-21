@@ -14,6 +14,7 @@ import { database } from '@/firebase';
 import Multi from '@customTypes/tmdb/Multi';
 import FirestoreMulti from '@customTypes/FirestoreMulti';
 import SearchResult from '@components/SearchResult/SearchResult';
+import posterSrc from '@functions/posterSrc/posterSrc';
 
 type Props = {
   content: Multi[];
@@ -77,7 +78,7 @@ const ContentTiles: FC<Props> = ({ content }) => {
                   contentType={c.media_type}
                   date={date(c)}
                   image={{
-                    src: `${process.env.NEXT_PUBLIC_TMDB_IMAGE_URL_BASE}/w500${c.poster_path}`,
+                    src: posterSrc(c),
                     alt: `${title(c)}`,
                     width: 500,
                     height: 500,
