@@ -6,7 +6,6 @@ import title from '@functions/title';
 import { useUserContent } from '@context/UserContentContext';
 import authenticateUser from '@functions/authenticateUser';
 import addContentToContentsDocument from '@functions/addContentToContentsDocument/addContentToContentsDocument';
-import Tile from '@components/Tile/Tile';
 import date from '@functions/date';
 import addContentToContentListsDocument from '@functions/addContentToContentListsDocument/addContentToContentListsDocument';
 import removeContentFromContentListsDocument from '@functions/removeContentFromContentListsDocument/removeContentFromContentListsDocument';

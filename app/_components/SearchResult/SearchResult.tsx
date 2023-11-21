@@ -8,9 +8,9 @@ import Close from '@components/icons/Close/Close';
 import { TMDBDate } from '@functions/date';
 
 type Props = {
-  title?: string;
-  contentType?: MediaType;
-  date?: TMDBDate;
+  title: string;
+  contentType: MediaType;
+  date: TMDBDate;
   image: ComponentProps<typeof Image>;
   mode: 'add' | 'remove';
   handleClick: () => void;
