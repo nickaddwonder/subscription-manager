@@ -1,7 +1,6 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
 import { ClerkProvider, SignedIn } from '@clerk/nextjs';
-import { UserContentProvider } from '@context/UserContentContext';
 import ReactQueryProvider from '@context/ReactQueryContext';
 import Header from '@components/Header/Header';
 
@@ -20,16 +19,14 @@ export default function RootLayout({
   return (
     <ReactQueryProvider>
       <ClerkProvider>
-        <UserContentProvider>
-          <html lang="en">
-            <body className={inter.className}>
-              <SignedIn>
-                <Header />
-              </SignedIn>
-              {children}
-            </body>
-          </html>
-        </UserContentProvider>
+        <html lang="en">
+          <body className={inter.className}>
+            <SignedIn>
+              <Header />
+            </SignedIn>
+            {children}
+          </body>
+        </html>
       </ClerkProvider>
     </ReactQueryProvider>
   );
