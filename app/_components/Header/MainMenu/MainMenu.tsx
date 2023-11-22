@@ -11,7 +11,8 @@ const MainMenu: FC = () => {
   const pathname = usePathname();
   const [open, setOpen] = useState<boolean>(false);
   const [mobileMenuDisabled, setMobileMenuDisabled] = useState<boolean>(false);
-  const isLg = useMediaQuery(`(min-width: 769px)`);
+  const isLg = useMediaQuery(`(min-width: 769px)
+  `);
 
   const handleResize = () => {
     if (isLg) {
